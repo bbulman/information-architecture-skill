@@ -110,10 +110,6 @@ The cases ran through Anthropic's skill-creator skill. By round three the instal
 
 `SKILL.md` holds the method. `references/` holds what Claude reads only when the job needs it, and `scripts/` holds the checks.
 
-## Where it came from
-
-Two public skills shared this name and couldn't be installed together, so I combined their ideas into one and rewrote it. Credit goes to [lyndonkl/claude](https://github.com/lyndonkl/claude), [RavenClaude](https://github.com/mcorbett51090/RavenClaude) and [Jorge Arango's essays](https://jarango.com). [`NOTICE.md`](NOTICE.md) has the details.
-
 ## Licence
 
 MIT, for the skills and the tests. See [`LICENSE`](LICENSE) and [`NOTICE.md`](NOTICE.md).
