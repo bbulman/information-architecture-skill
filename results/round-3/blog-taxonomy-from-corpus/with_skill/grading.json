@@ -1,0 +1,118 @@
+{
+  "expectations": [
+    {
+      "text": "ia-proposal.md assigns every one of the 24 posts to a category, with no post missing or left unassigned",
+      "passed": true,
+      "evidence": "Script: parsed every table row carrying a post filename under its heading and compared with the 24 filenames in posts/. Result: 24 rows, missing [], unknown files [], in more than one table [], rows not under a defined category []. Per heading: Plan a workshop or offsite 8, Run better meetings 5, Warm up the group 3, Get input and make decisions 5, Handle tough team dynamics 3 (sum 24). All five are defined in s4.1. The freelance pricing post is a real assignment, not an exclusion: Appendix A line 251 lists it in the Plan table, and line 107 says \"For now it lives in Plan a workshop or offsite\"."
+    },
+    {
+      "text": "ia-proposal.md presents at least two alternative ways to organize the posts before recommending one",
+      "passed": true,
+      "evidence": "Three schemes are compared in s3 'The options' (lines 44-56): a table sets A by the reader's job, B by type of content and C by kind of session against who it serves, posts per category (8,5,3,5,3 / 4,3,6,3,8 / 5,5,2,3,9), where it strains and what it costs. The recommended scheme is set out in detail only afterwards, in s4 (line 58 on: slugs, what goes here and what doesn't, tag definitions, rules). Closest call in this run: the opening summary is more than a one-line mention. Lines 7-17 give the recommendation, a five-row category table with one-phrase descriptors and counts, and the bare tag list. I passed it because that block is an overview with no boundaries, definitions, rules or post placements, so the scheme is not 'set out in detail' until after the comparison."
+    },
+    {
+      "text": "ia-proposal.md merges tips, Tips and \"facilitation tips\" into one term (or retires all three) rather than keeping two or more of them",
+      "passed": true,
+      "evidence": "Appendix B lines 300-302 retire all three: \"facilitation tips | 4 | Retire; posts re-homed by subject\", and the same for tips and Tips. None appears in the ten tags at s4.2, and script tag counts from Appendix A contain no tips term. Line 37 gives the reason: \"Nearly every post on this blog is a tip, so the tag can't separate anything.\""
+    },
+    {
+      "text": "ia-proposal.md retires the misc tag, and its recommended scheme has no misc, other or uncategorized category",
+      "passed": true,
+      "evidence": "Appendix B line 320: \"misc | 4 | Retire; posts re-homed by subject | none | 410\". The five categories (s4.1) are all named tasks with no misc, other or uncategorized bucket. Script confirms no misc in the new tags, and line 56 rejects schemes with a catch-all: \"the only scheme with no catch-all bucket\"."
+    },
+    {
+      "text": "ia-proposal.md does not present user research results (card sort percentages, tree test scores, participant quotes) as if they had been collected",
+      "passed": true,
+      "evidence": "No results are claimed. Line 19: \"I have seen no analytics, search logs or reader questions, so nothing here rests on usage data.\" Line 191: \"No readers have sorted them.\" Line 42 labels the gaps \"my reading of the posts, not data\". The 80% and 70% figures in s7 sit in a column headed Target, for a test still to be run, and line 226 says \"I have no baseline\"."
+    },
+    {
+      "text": "ia-proposal.md includes a way to test the scheme with readers, such as a card sort or a tree test with tasks",
+      "passed": true,
+      "evidence": "s7 (lines 206-224) specifies a tree test: \"Run a tree test before building\", 20 or more team leads who run their own sessions, a text-only tree, 11 tasks in the reader's words each with a correct answer and a target (80% or 70%), plus directness and time criteria. Tasks 6-11 target the weak fits. Script: all 11 stated correct answers match the post's category in Appendix A."
+    },
+    {
+      "text": "ia-proposal.md gives a rule or an owner for adding new tags in future, such as checking for a near-duplicate before creating one",
+      "passed": true,
+      "evidence": "s8 line 230 names an owner: \"Owner: you.\" Line 232 gives the rule: \"Adding a term: check the synonyms first, confirm it applies to at least two posts today, add it to the file, then use it.\" Line 235 adds a quarterly drift check that includes near-duplicates."
+    },
+    {
+      "text": "ia-proposal.md keeps categories and tags separate: each post gets one primary category, and tags are a separate dimension",
+      "passed": true,
+      "evidence": "Line 62: \"Each post gets exactly one.\" Line 56: \"Each post has one category, and tags handle the cross-cuts.\" Tags are a separate controlled list (s4.2) in three groups. Script: every post appears in exactly one category table, and no tag holds exactly the same posts as any category."
+    },
+    {
+      "text": "The category totals and the rules stated in ia-proposal.md match its own post-by-post assignment table, with no contradiction",
+      "passed": true,
+      "evidence": "Script: Appendix A per-category counts 8,5,3,5,3 match the s1 table, each Appendix A heading, the s4.5 tree and \"8 + 5 + 3 + 5 + 3 = 24\". All ten tag totals in s4.2 match counts from Appendix A (no differences). Rules checked: exactly one category per post holds for 24/24; one to three tags holds for 23 posts (distribution 0:1, 1:11, 2:9, 3:3) and the only zero-tag post is the freelance post, the stated exception; at least two posts per tag holds (minimum 2); no tag equals a category. Also matched: 5 W markers and 1 M marker against \"five of those less cleanly\" and one misfit; Exercises 9 of 24; Appendix B 20 x 301 and 2 x 410 against line 181. One wording looseness, not a contradiction: rule 1 says the freelance post \"has none\", which lines 107 and 235 make clear means tags."
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 0,
+    "total": 9,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_tokens": 226889,
+    "duration_ms": 622908,
+    "total_duration_seconds": 622.9
+  },
+  "claims": [
+    {
+      "claim": "26 distinct tags, used 51 times across 24 posts; twelve used once",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Script on post front matter: distinct 26, uses 51, used once 12."
+    },
+    {
+      "claim": "The tips family spans 7 posts under three spellings",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Script: 7 posts carry a tips variant."
+    },
+    {
+      "claim": "Old tags shown in Appendix A match the posts",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Script: 0 mismatches against front matter across 24 rows."
+    },
+    {
+      "claim": "Only 7 of the 24 summaries state a length",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Rough duration regex over post bodies: 7 hits."
+    },
+    {
+      "claim": "I drafted three schemes and sorted all 24 posts into each",
+      "type": "process",
+      "verified": false,
+      "evidence": "Only per-category counts appear for B and C (each sums to 24); no post-level sort is shown and no transcript was provided."
+    },
+    {
+      "claim": "A new category must hold at least five posts",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Applies to new categories only (line 150), so not a contradiction, but Warm up the group and Handle tough team dynamics launch with 3 each and would not clear the bar."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "One defect, the freelance post left without a category, fails three assertions in the without_skill run (assign every post, one primary category, rules match the table). They are not independent on this point, so the score gap overstates it. Consider making the separation assertion test only that no post has two categories and that tags do not duplicate categories.",
+        "assertion": "ia-proposal.md keeps categories and tags separate: each post gets one primary category, and tags are a separate dimension"
+      },
+      {
+        "reason": "An answer-first summary sits awkwardly with 'before recommending'. The grading note allows a one-line mention, but with_skill's summary is a five-row table plus the tag list, which needed a judgment call. State whether a summary table counts as setting the scheme out.",
+        "assertion": "ia-proposal.md presents at least two alternative ways to organize the posts before recommending one"
+      },
+      {
+        "reason": "Passes on a single sentence in the without_skill run. To discriminate, require named tasks with expected answers and a success threshold, or a stated participant group.",
+        "assertion": "ia-proposal.md includes a way to test the scheme with readers, such as a card sort or a tree test with tasks"
+      },
+      {
+        "reason": "No assertion covers what happens to the old tag URLs (with_skill has a per-tag redirect table with status codes, without_skill one sentence) or whether the off-audience freelance post is flagged to the owner as a decision, both of which separated the runs or could regress unnoticed."
+      }
+    ],
+    "overall": "Most assertions test real outcomes and the two mechanical ones discriminated well. The main weakness is overlap: one missing category counts three times."
+  }
+}

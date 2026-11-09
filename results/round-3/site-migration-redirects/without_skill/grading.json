@@ -1,0 +1,107 @@
+{
+  "expectations": [
+    {
+      "text": "Every one of the 34 URLs in current-urls.txt appears in the redirect list with a destination or a 410",
+      "passed": false,
+      "evidence": "MECHANICAL RESULT: all 34 lines of current-urls.txt appear exactly once in section 3 (no missing lines, no duplicates, every path matches its input line), but only 32 of 34 have a destination, a kept-unchanged marker or a 410 (13 with a destination, 19 unchanged). The other two rows have no destination: line 113 \"| 2 | `/?p=112` | Unknown until looked up |\" and line 114 \"| 3 | `/?page_id=7` | Unknown until looked up |\". The plan's summary counts them separately (line 13, \"Can't be mapped until someone looks them up on the live WordPress site | 2\"). Not guessing is the right call and earns assertion 6, but 'every one ... with a destination or a 410' is literally not met on two rows."
+    },
+    {
+      "text": "Moved pages get 301 redirects, and the plan uses no 302 for a permanent move",
+      "passed": true,
+      "evidence": "Line 107: \"All redirects are 301s.\" Line 12: \"Get a permanent (301) redirect to a new URL | 13\". Check script: all 14 live rules in the `_redirects` file have status 301, and the two commented-out ID rules are also 301!. A search of the whole plan finds zero occurrences of \"302\"."
+    },
+    {
+      "text": "Old URLs with an obvious new equivalent are redirected to that equivalent, not to the homepage",
+      "passed": true,
+      "evidence": "Every old URL with an obvious equivalent goes to it: line 120 `/about-us.html` to `/about-us/`; line 121 `/About_Us/Our-Team` to `/about-us/leadership/`; line 122 `/services/change-management.php` to `/services/change-management/`; lines 125-127 dated posts to `/blog/<same slug>/`. Check script: no table row or file rule targets `/`. Line 107: \"Nothing goes to the home page\"."
+    },
+    {
+      "text": "The plan states URL rules covering lowercase, hyphens, no .html or .php extensions, and one trailing-slash form",
+      "passed": true,
+      "evidence": "Section 2 URL rules: rule 3 (line 94) \"Lowercase letters and hyphens only. No underscores and no `.html` or `.php`.\" Rule 4 (line 95) \"Every page ends in a trailing slash, matching what WordPress used\", with the slashless version redirecting to it."
+    },
+    {
+      "text": "The proposed sitemap labels each page or URL pattern with a template type, or the plan includes a content model",
+      "passed": false,
+      "evidence": "Neither condition is met. A search of the plan finds zero occurrences of \"template\" and zero of \"content model\". The sitemap (lines 57-81) has only occasional notes such as \"Overview of all services\", \"NEW hub page\" and \"One listing page\", and most rows have no label at all. URL rule 6 (line 97) lists path patterns but assigns them no template type."
+    },
+    {
+      "text": "The plan handles the ?p=112 and ?page_id=7 URLs explicitly, with a stated way to resolve them",
+      "passed": true,
+      "evidence": "Section 1 \"Two links point at WordPress ID numbers\" (lines 34-40): \"Open each address in a browser, and WordPress will forward you to the page's real address. Find that address in section 3, then put its new URL into the two commented-out lines at the top of section 4.\" It is flagged as a must-do while WordPress runs, and rows 2-3 appear in table 3a."
+    },
+    {
+      "text": "The plan handles the PDF under wp-content/uploads explicitly",
+      "passed": true,
+      "evidence": "Line 132: \"| 30 | `/wp-content/uploads/2022/03/Operations-Benchmark-Report.pdf` | `/resources/whitepapers/operations-benchmark-report.pdf` |\", implemented in the redirect file at line 180. Line 212 covers other uploads, and assumption 8 (line 268) says what changes if the PDF goes behind a form."
+    },
+    {
+      "text": "No redirect target in the list is itself the source of another redirect",
+      "passed": true,
+      "evidence": "MECHANICAL RESULT: 27 concrete targets (13 table rows and 14 `_redirects` rules) tested against 27 sources (13 table rows and 14 rules), wildcards and `:param` placeholders expanded: 0 chains. The checker's matchers passed negative controls. The two pending ID rows have no target yet; line 38 instructs putting in the page's new URL."
+    },
+    {
+      "text": "The plan says how to test the redirects before launch, such as crawling the old URLs and checking status codes",
+      "passed": true,
+      "evidence": "Section 6 \"The test\" (lines 238-249) gives a runnable curl loop over current-urls.txt printing status, hops and final URL, with explicit pass criteria: \"every line ends in 200, the URLs in section 3c show 0 hops, the URLs in section 3b show exactly 1 hop, and each final address matches section 3\". The before-launch list requires it (line 227: \"Run the test below on staging.\")."
+    },
+    {
+      "text": "Any shippable redirect file in migration-plan.md implements every redirected row of its mapping table, or marks each missing row as pending with a reason",
+      "passed": true,
+      "evidence": "MECHANICAL RESULT: the `_redirects` block (lines 166-199) was run first-match against table 3b: 13 of 13 redirected rows implemented with the matching target and status 301, 0 problems. The two pending rows (3a) are commented out with a reason, lines 169-172: \"WordPress ID links. Fill in the target after the lookup, then remove the leading #.\""
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 2,
+    "total": 10,
+    "pass_rate": 0.8
+  },
+  "timing": {
+    "total_tokens": 177498,
+    "duration_ms": 363800,
+    "total_duration_seconds": 363.8
+  },
+  "claims": [
+    {
+      "claim": "19 stay the same, 13 get a 301, 2 can't be mapped yet",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Check script: 19 unchanged, 13 redirects, 2 pending."
+    },
+    {
+      "claim": "The redirect file covers the 13 redirects in section 3b plus the extra addresses in section 5",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Check script: 13 of 13 implemented. The file has 14 live rules, including `/resources`, `/feed`, `/blog/feed`, `/wp-sitemap.xml` and `/sitemap_index.xml`."
+    },
+    {
+      "claim": "The four-segment post rule is safe because the new site has no pages that deep",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The deepest page in the proposed sitemap has three path segments, so no new page matches `/:year/:month/:day/:slug`."
+    },
+    {
+      "claim": "The site will be hosted on Netlify",
+      "type": "quality",
+      "verified": false,
+      "evidence": "The user named no host. The plan flags this as an assumption (lines 44 and 262) and gives a host table, so the assumption is disclosed, not established."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Every one of the 34 URLs in current-urls.txt appears in the redirect list with a destination or a 410",
+        "reason": "Read literally this asks for a destination that no plan can know for /?p=112 and /?page_id=7 without guessing, and assertion 6 rewards exactly the lookup step that leaves those rows empty. Both runs fail it only on those two rows. Reword to allow a destination, a kept marker, a 410, or (for ID URLs that the input cannot resolve) a named lookup step."
+      },
+      {
+        "assertion": "Any shippable redirect file in migration-plan.md implements every redirected row of its mapping table, or marks each missing row as pending with a reason",
+        "reason": "A plan with no redirect file passes this vacuously, so writing nothing scores the same as writing a faithful file. The user asked for the full redirect list; if a host-ready file is wanted, say so in a separate assertion, or score this one only when a file exists."
+      },
+      {
+        "reason": "No assertion checks that each redirect target actually exists in the proposed sitemap. A plan could redirect to a page it never proposes and pass assertions 3 and 8. Both runs happen to pass this (the check script found no orphan targets)."
+      }
+    ],
+    "overall": "Mostly discriminating on coverage but weak at separating the runs: only assertion 5 differs. Assertion 1 needs rewording to agree with assertion 6, and assertion 10 is vacuous for a plan with no file."
+  }
+}

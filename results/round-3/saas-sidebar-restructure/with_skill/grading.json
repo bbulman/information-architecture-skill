@@ -1,0 +1,113 @@
+{
+  "expectations": [
+    {
+      "text": "The proposed primary sidebar has seven or fewer top-level items",
+      "passed": true,
+      "evidence": "Line 57 of nav-proposal.md: \"SIDEBAR, PRIMARY (6)\", listing Dashboard, My Tasks, Projects, Reports, Docs & Files, Team (lines 58-73). Settings and Help sit apart under \"SIDEBAR, UTILITY (2, pinned to the bottom)\" (line 75). Six is under the cap of seven."
+    },
+    {
+      "text": "Billing, Settings, Help and What's New are moved out of the primary list into a utility, account or footer area",
+      "passed": true,
+      "evidence": "All four are in the utility block at lines 75-83: Settings and Help are the two pinned items, Billing is \"settings page, moved from top level\" (line 79) and What's New is \"feed, moved from top level; unread dot on Help\" (line 83). None appears in the primary list."
+    },
+    {
+      "text": "Reports, Analytics and Insights are no longer three separate top-level items",
+      "passed": true,
+      "evidence": "Line 65: \"Reports  hub with tabs  absorbs Analytics, Insights\". Line 68 places both under \"Trends ... was Analytics and Insights\". Appendix rows 7 and 8 map each to Reports > Trends."
+    },
+    {
+      "text": "Team and People are no longer two separate top-level items",
+      "passed": true,
+      "evidence": "Line 73: \"Team  people list  absorbs People\". Appendix row 13 (line 206): \"People | Team | Merges\"."
+    },
+    {
+      "text": "nav-proposal.md names one specific location for exporting a report",
+      "passed": true,
+      "evidence": "Line 90: \"Export button in the header of every report and of Trends, always in the same position\", with the traced path \"Reports, open the report, Export\"."
+    },
+    {
+      "text": "nav-proposal.md names one specific location for inviting a teammate",
+      "passed": true,
+      "evidence": "Line 91: \"Invite teammate button in the header of the Team page\", with the traced path \"Team, Invite teammate: two clicks to the form\"."
+    },
+    {
+      "text": "nav-proposal.md includes tree-test tasks written as user goals, with success targets",
+      "passed": true,
+      "evidence": "Lines 163-176: a 12-row table of scenario tasks with a Success target column. They are goals and avoid the target label, for example task 1 \"A client wants last month's project status as a PDF to pass to their boss\" and task 2 \"A new designer joins on Monday and needs a login for this tool\"."
+    },
+    {
+      "text": "nav-proposal.md does not present invented usage data or test results as fact",
+      "passed": true,
+      "evidence": "Line 3 states the limit up front: \"I have not seen the product, the tickets or any usage data, so every statement about what an item contains or how often it is used is an assumption\" and \"No research has been run: the numbers in section 7 are targets, not results.\" Usage statements are hedged where they occur: line 144 \"probably visited less often than project work. I have no usage data\", line 120 \"if they turn out to be heavily used\", line 46 \"probably common at agencies\". A keyword sweep for frequency, percentage and test-result language found no unhedged claim; the only percentages are the tree-test targets."
+    },
+    {
+      "text": "nav-proposal.md names one canonical home for exporting a report and one for inviting a teammate, and says any other entry points lead to those homes",
+      "passed": true,
+      "evidence": "Lines 86-91: a table headed \"One home for each problem task\" with a \"Canonical home\" column naming the Export button in the report header and the Invite teammate button in the Team page header, and an \"Other ways in, all leading to the same place\" column. Line 80 reinforces it: Settings > Team is \"link only, goes to the Team page; not a second page\". Line 109 says project tabs are \"filtered views, not second homes\". Caveat: the Export entry in each row's menu (line 90) reads as a parallel control rather than a link to the header button; it passes because the document explicitly classes it as leading to the same place."
+    },
+    {
+      "text": "Every tree-test task in nav-proposal.md has a stated correct answer and a numeric success target",
+      "passed": true,
+      "evidence": "Checked all 12 rows at lines 165-176. Each has a Correct answer and a percentage: 1 Reports > All reports 80%; 2 Team or Settings > Team 80%; 3 and 4 Reports > Trends 70%; 5 Projects > Timeline 70%; 6 Projects > Calendar 70%; 7 Docs & Files > Files 70%; 8 Docs & Files > Docs 70%; 9 Docs & Files > Wiki 70%; 10 Settings > Integrations 70%; 11 Settings > Billing 70%; 12 Help > What's New 70%."
+    }
+  ],
+  "summary": {
+    "passed": 10,
+    "failed": 0,
+    "total": 10,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_tokens": 199599,
+    "duration_ms": 428660,
+    "total_duration_seconds": 428.7
+  },
+  "claims": [
+    {
+      "claim": "The sidebar goes from 18 items to 8, and ten leave the top level",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Eight top-level items at lines 58-83. The ten that leave are Timeline, Calendar, Analytics, Insights, Files, Wiki, People, Integrations, Billing and What's New."
+    },
+    {
+      "claim": "Appendix totals: 7 stay at the top, 1 stays and is renamed, 9 move under a parent and 1 merges, making 18",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Counted the Change column at lines 194-211: 7, 1, 9 and 1."
+    },
+    {
+      "claim": "Eight of the 18 items sit in three near-synonym sets",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Reports/Analytics/Insights, Files/Docs/Wiki and Team/People total eight labels from the prompt."
+    },
+    {
+      "claim": "Option B would be 24 sidebar lines (18 items plus 6 headings)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Line 48 names six headings holding 2+3+3+3+5+2 = 18 items."
+    },
+    {
+      "claim": "Option A gives each failing task one door",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Holds for pages. It is loose for sidebar routes: invite can also be reached through the Settings > Team link (line 80), which task 2 accepts as correct (line 166). Both resolve to the same page."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "nav-proposal.md names one specific location for inviting a teammate",
+        "reason": "This and the export twin pass any concrete location, even when the document lists several. The discrimination sits entirely in the canonical-home assertion, so these two add little."
+      },
+      {
+        "assertion": "nav-proposal.md names one canonical home for exporting a report and one for inviting a teammate, and says any other entry points lead to those homes",
+        "reason": "A column heading is enough to satisfy 'says other entry points lead there'. Here a row-menu Export is a parallel control that does not literally lead to the header button. Consider requiring that secondary entry points navigate to or open the canonical control."
+      },
+      {
+        "reason": "No assertion checks that tree-test task wording avoids the target label, which is what separates a usable tree test from a label-matching one. This run does avoid it, so the strength goes unrecorded."
+      }
+    ],
+    "overall": "Graded from the deliverable only: the workspace holds no transcript, so process claims were not checked. The canonical-home, invented-data and per-task assertions discriminate well; the structural ones are easy."
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "expectations": [
+    {
+      "text": "The proposed primary sidebar has seven or fewer top-level items",
+      "passed": false,
+      "evidence": "The sketch at lines 20-29 has eight rows above the pinned footer: Dashboard, My Tasks, Projects, Timeline, Calendar, Reports, Docs & Files, Team. Line 3 and line 40 put the sidebar at ten destinations (\"With ten rows in small clusters\"). Even excluding the footer, eight exceeds the cap of seven."
+    },
+    {
+      "text": "Billing, Settings, Help and What's New are moved out of the primary list into a utility, account or footer area",
+      "passed": true,
+      "evidence": "Lines 32-35: Settings and Help are \"(pinned to the bottom)\". Line 64 moves Billing to \"Settings, Billing\" and line 67 moves What's New to the \"Help menu\". Line 38: \"The footer holds account and support items\"."
+    },
+    {
+      "text": "Reports, Analytics and Insights are no longer three separate top-level items",
+      "passed": true,
+      "evidence": "Line 3: \"Reports, Analytics and Insights become one Reports area.\" Lines 56-57 show Analytics and Insights as tabs that lose their rows."
+    },
+    {
+      "text": "Team and People are no longer two separate top-level items",
+      "passed": true,
+      "evidence": "Line 3: \"Team and People become one Team area.\" Line 62: People is \"Team, Members tab (first tab)\" and \"Loses its row\"."
+    },
+    {
+      "text": "nav-proposal.md names one specific location for exporting a report",
+      "passed": true,
+      "evidence": "Line 71: \"Every report opens with a labelled Export button in the same spot in the page header, outside any 'more' menu.\" That is a concrete location, though the same line adds further Export controls on the Analytics and Insights tabs and in list rows."
+    },
+    {
+      "text": "nav-proposal.md names one specific location for inviting a teammate",
+      "passed": true,
+      "evidence": "Line 73: \"The pinned 'Invite teammates' row opens one dialog over the current page, from anywhere in the product.\" It is drawn at line 33 and headlined in the recommendation at line 3, so a concrete location is named. Passes on that basis only; the spread across four entry points is what fails the canonical-home assertion."
+    },
+    {
+      "text": "nav-proposal.md includes tree-test tasks written as user goals, with success targets",
+      "passed": true,
+      "evidence": "Line 106: \"Use the two complaint tasks plus tasks for everything that moved: connect an integration, update the payment card, find a procedure in the wiki, see what shipped recently, and find a chart of last month's work. Aim for at least 80% reaching the right place on export and invite, with no moved item losing more than 10 points against today.\" A thin pass: the tasks are goal-phrased and targets exist, but this is one inline sentence, the two main tasks are only referred to, and 'find a procedure in the wiki' gives away the label."
+    },
+    {
+      "text": "nav-proposal.md does not present invented usage data or test results as fact",
+      "passed": false,
+      "evidence": "Usage frequency is stated flatly, without a hedge. Line 13: \"The list also gives equal weight to things used hourly and things used once a year\". Line 3: \"The five rows that carry daily work\". Line 81: \"these are well-understood words on the most used part of the sidebar\". The disclaimer at line 7 (\"I have not seen usage data\") scopes itself to the structure and to guesses about what a page does, and none of these three statements appears in the Assumptions table (lines 91-98). Line 7 also shows the author knew no such data existed."
+    },
+    {
+      "text": "nav-proposal.md names one canonical home for exporting a report and one for inviting a teammate, and says any other entry points lead to those homes",
+      "passed": false,
+      "evidence": "No canonical home is named for either task. Invite: line 73 presents equal routes, \"There are four ways in and one dialog to maintain\", and the dialog opens over any page, so it is not a place; line 62 separately calls Team, Members the home of \"the Invite button\", leaving two candidates. Export: line 71 adds parallel buttons (\"The Analytics and Insights tabs carry the same button\", \"Rows in the report list also offer Export\") and never says these lead to a primary location."
+    },
+    {
+      "text": "Every tree-test task in nav-proposal.md has a stated correct answer and a numeric success target",
+      "passed": false,
+      "evidence": "Line 106 states no correct answer for any of the seven tasks. An absolute numeric target exists only for export and invite (80%). The five other tasks share one relative condition, \"no moved item losing more than 10 points against today\", with no target of their own."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 4,
+    "total": 10,
+    "pass_rate": 0.6
+  },
+  "timing": {
+    "total_tokens": 157965,
+    "duration_ms": 226264,
+    "total_duration_seconds": 226.3
+  },
+  "claims": [
+    {
+      "claim": "The sidebar goes from 18 rows to 10 destinations plus one pinned action",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Lines 20-35 show eight rows above the footer, plus Settings and Help, plus the Invite teammates action."
+    },
+    {
+      "claim": "There are four ways in to the invite dialog",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Line 73 names the pinned row, the Team, Members button, Settings and the Billing seat count."
+    },
+    {
+      "claim": "The five rows that carry daily work stay exactly as they are",
+      "type": "factual",
+      "verified": false,
+      "evidence": "The five rows are unchanged (lines 50-54), but 'carry daily work' has no source. Line 7 says no usage data was seen."
+    },
+    {
+      "claim": "Timeline and Calendar are on the most used part of the sidebar",
+      "type": "factual",
+      "verified": false,
+      "evidence": "Line 81 asserts this with no usage data and it is the stated reason for keeping both rows, which is also what pushes the primary list past seven."
+    },
+    {
+      "claim": "This is a navigation change only, and no content has to be migrated between systems",
+      "type": "factual",
+      "verified": false,
+      "evidence": "Line 42 asserts this, but the author has not seen the product (line 7). Merging Team with People and Docs with Wiki and Files depends on the guesses at lines 93-96."
+    },
+    {
+      "claim": "The Export button and invite dialog are both small",
+      "type": "quality",
+      "verified": false,
+      "evidence": "Line 112 asserts this. Unverifiable, and the dialog as specified includes a request-to-admin path for users without invite rights (line 75)."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "nav-proposal.md includes tree-test tasks written as user goals, with success targets",
+        "reason": "One inline sentence of short phrases passes this. Consider requiring tasks written out as participant-ready scenarios that do not contain the target label; that would separate this run from a real tree-test plan without relying on the per-task assertion."
+      },
+      {
+        "assertion": "nav-proposal.md names one specific location for inviting a teammate",
+        "reason": "A document with four equal entry points still passes, because any one of them is a concrete location. The canonical-home assertion does the real work."
+      },
+      {
+        "assertion": "The proposed primary sidebar has seven or fewer top-level items",
+        "reason": "The assertion does not define whether a pinned footer counts. It did not change either verdict here, but state that utility items are excluded so a borderline run is graded the same way each time."
+      }
+    ],
+    "overall": "Graded from the deliverable only: the workspace holds no transcript, so process claims were not checked. The four failures are all real gaps, and the invented-data failure hinges on three specific unhedged sentences rather than on the document's general tone."
+  }
+}

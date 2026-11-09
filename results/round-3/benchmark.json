@@ -1,0 +1,478 @@
+{
+  "metadata": {
+    "skill_name": "information-architecture",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-11-09T18:51:24Z",
+    "evals_run": [
+      "blog-taxonomy-from-corpus",
+      "saas-sidebar-restructure",
+      "site-migration-redirects"
+    ],
+    "runs_per_configuration": 1,
+    "model": "claude-opus-5-5"
+  },
+  "runs": [
+    {
+      "eval_id": "blog-taxonomy-from-corpus",
+      "eval_name": "blog-taxonomy-from-corpus",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 622.9,
+        "tokens": 226889,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "ia-proposal.md assigns every one of the 24 posts to a category, with no post missing or left unassigned",
+          "passed": true,
+          "evidence": "Script: parsed every table row carrying a post filename under its heading and compared with the 24 filenames in posts/. Result: 24 rows, missing [], unknown files [], in more than one table [], rows not under a defined category []. Per heading: Plan a workshop or offsite 8, Run better meetings 5, Warm up the group 3, Get input and make decisions 5, Handle tough team dynamics 3 (sum 24). All five are defined in s4.1. The freelance pricing post is a real assignment, not an exclusion: Appendix A line 251 lists it in the Plan table, and line 107 says \"For now it lives in Plan a workshop or offsite\"."
+        },
+        {
+          "text": "ia-proposal.md presents at least two alternative ways to organize the posts before recommending one",
+          "passed": true,
+          "evidence": "Three schemes are compared in s3 'The options' (lines 44-56): a table sets A by the reader's job, B by type of content and C by kind of session against who it serves, posts per category (8,5,3,5,3 / 4,3,6,3,8 / 5,5,2,3,9), where it strains and what it costs. The recommended scheme is set out in detail only afterwards, in s4 (line 58 on: slugs, what goes here and what doesn't, tag definitions, rules). Closest call in this run: the opening summary is more than a one-line mention. Lines 7-17 give the recommendation, a five-row category table with one-phrase descriptors and counts, and the bare tag list. I passed it because that block is an overview with no boundaries, definitions, rules or post placements, so the scheme is not 'set out in detail' until after the comparison."
+        },
+        {
+          "text": "ia-proposal.md merges tips, Tips and \"facilitation tips\" into one term (or retires all three) rather than keeping two or more of them",
+          "passed": true,
+          "evidence": "Appendix B lines 300-302 retire all three: \"facilitation tips | 4 | Retire; posts re-homed by subject\", and the same for tips and Tips. None appears in the ten tags at s4.2, and script tag counts from Appendix A contain no tips term. Line 37 gives the reason: \"Nearly every post on this blog is a tip, so the tag can't separate anything.\""
+        },
+        {
+          "text": "ia-proposal.md retires the misc tag, and its recommended scheme has no misc, other or uncategorized category",
+          "passed": true,
+          "evidence": "Appendix B line 320: \"misc | 4 | Retire; posts re-homed by subject | none | 410\". The five categories (s4.1) are all named tasks with no misc, other or uncategorized bucket. Script confirms no misc in the new tags, and line 56 rejects schemes with a catch-all: \"the only scheme with no catch-all bucket\"."
+        },
+        {
+          "text": "ia-proposal.md does not present user research results (card sort percentages, tree test scores, participant quotes) as if they had been collected",
+          "passed": true,
+          "evidence": "No results are claimed. Line 19: \"I have seen no analytics, search logs or reader questions, so nothing here rests on usage data.\" Line 191: \"No readers have sorted them.\" Line 42 labels the gaps \"my reading of the posts, not data\". The 80% and 70% figures in s7 sit in a column headed Target, for a test still to be run, and line 226 says \"I have no baseline\"."
+        },
+        {
+          "text": "ia-proposal.md includes a way to test the scheme with readers, such as a card sort or a tree test with tasks",
+          "passed": true,
+          "evidence": "s7 (lines 206-224) specifies a tree test: \"Run a tree test before building\", 20 or more team leads who run their own sessions, a text-only tree, 11 tasks in the reader's words each with a correct answer and a target (80% or 70%), plus directness and time criteria. Tasks 6-11 target the weak fits. Script: all 11 stated correct answers match the post's category in Appendix A."
+        },
+        {
+          "text": "ia-proposal.md gives a rule or an owner for adding new tags in future, such as checking for a near-duplicate before creating one",
+          "passed": true,
+          "evidence": "s8 line 230 names an owner: \"Owner: you.\" Line 232 gives the rule: \"Adding a term: check the synonyms first, confirm it applies to at least two posts today, add it to the file, then use it.\" Line 235 adds a quarterly drift check that includes near-duplicates."
+        },
+        {
+          "text": "ia-proposal.md keeps categories and tags separate: each post gets one primary category, and tags are a separate dimension",
+          "passed": true,
+          "evidence": "Line 62: \"Each post gets exactly one.\" Line 56: \"Each post has one category, and tags handle the cross-cuts.\" Tags are a separate controlled list (s4.2) in three groups. Script: every post appears in exactly one category table, and no tag holds exactly the same posts as any category."
+        },
+        {
+          "text": "The category totals and the rules stated in ia-proposal.md match its own post-by-post assignment table, with no contradiction",
+          "passed": true,
+          "evidence": "Script: Appendix A per-category counts 8,5,3,5,3 match the s1 table, each Appendix A heading, the s4.5 tree and \"8 + 5 + 3 + 5 + 3 = 24\". All ten tag totals in s4.2 match counts from Appendix A (no differences). Rules checked: exactly one category per post holds for 24/24; one to three tags holds for 23 posts (distribution 0:1, 1:11, 2:9, 3:3) and the only zero-tag post is the freelance post, the stated exception; at least two posts per tag holds (minimum 2); no tag equals a category. Also matched: 5 W markers and 1 M marker against \"five of those less cleanly\" and one misfit; Exercises 9 of 24; Appendix B 20 x 301 and 2 x 410 against line 181. One wording looseness, not a contradiction: rule 1 says the freelance post \"has none\", which lines 107 and 235 make clear means tags."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": "saas-sidebar-restructure",
+      "eval_name": "saas-sidebar-restructure",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 10,
+        "failed": 0,
+        "total": 10,
+        "time_seconds": 428.7,
+        "tokens": 199599,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The proposed primary sidebar has seven or fewer top-level items",
+          "passed": true,
+          "evidence": "Line 57 of nav-proposal.md: \"SIDEBAR, PRIMARY (6)\", listing Dashboard, My Tasks, Projects, Reports, Docs & Files, Team (lines 58-73). Settings and Help sit apart under \"SIDEBAR, UTILITY (2, pinned to the bottom)\" (line 75). Six is under the cap of seven."
+        },
+        {
+          "text": "Billing, Settings, Help and What's New are moved out of the primary list into a utility, account or footer area",
+          "passed": true,
+          "evidence": "All four are in the utility block at lines 75-83: Settings and Help are the two pinned items, Billing is \"settings page, moved from top level\" (line 79) and What's New is \"feed, moved from top level; unread dot on Help\" (line 83). None appears in the primary list."
+        },
+        {
+          "text": "Reports, Analytics and Insights are no longer three separate top-level items",
+          "passed": true,
+          "evidence": "Line 65: \"Reports  hub with tabs  absorbs Analytics, Insights\". Line 68 places both under \"Trends ... was Analytics and Insights\". Appendix rows 7 and 8 map each to Reports > Trends."
+        },
+        {
+          "text": "Team and People are no longer two separate top-level items",
+          "passed": true,
+          "evidence": "Line 73: \"Team  people list  absorbs People\". Appendix row 13 (line 206): \"People | Team | Merges\"."
+        },
+        {
+          "text": "nav-proposal.md names one specific location for exporting a report",
+          "passed": true,
+          "evidence": "Line 90: \"Export button in the header of every report and of Trends, always in the same position\", with the traced path \"Reports, open the report, Export\"."
+        },
+        {
+          "text": "nav-proposal.md names one specific location for inviting a teammate",
+          "passed": true,
+          "evidence": "Line 91: \"Invite teammate button in the header of the Team page\", with the traced path \"Team, Invite teammate: two clicks to the form\"."
+        },
+        {
+          "text": "nav-proposal.md includes tree-test tasks written as user goals, with success targets",
+          "passed": true,
+          "evidence": "Lines 163-176: a 12-row table of scenario tasks with a Success target column. They are goals and avoid the target label, for example task 1 \"A client wants last month's project status as a PDF to pass to their boss\" and task 2 \"A new designer joins on Monday and needs a login for this tool\"."
+        },
+        {
+          "text": "nav-proposal.md does not present invented usage data or test results as fact",
+          "passed": true,
+          "evidence": "Line 3 states the limit up front: \"I have not seen the product, the tickets or any usage data, so every statement about what an item contains or how often it is used is an assumption\" and \"No research has been run: the numbers in section 7 are targets, not results.\" Usage statements are hedged where they occur: line 144 \"probably visited less often than project work. I have no usage data\", line 120 \"if they turn out to be heavily used\", line 46 \"probably common at agencies\". A keyword sweep for frequency, percentage and test-result language found no unhedged claim; the only percentages are the tree-test targets."
+        },
+        {
+          "text": "nav-proposal.md names one canonical home for exporting a report and one for inviting a teammate, and says any other entry points lead to those homes",
+          "passed": true,
+          "evidence": "Lines 86-91: a table headed \"One home for each problem task\" with a \"Canonical home\" column naming the Export button in the report header and the Invite teammate button in the Team page header, and an \"Other ways in, all leading to the same place\" column. Line 80 reinforces it: Settings > Team is \"link only, goes to the Team page; not a second page\". Line 109 says project tabs are \"filtered views, not second homes\". Caveat: the Export entry in each row's menu (line 90) reads as a parallel control rather than a link to the header button; it passes because the document explicitly classes it as leading to the same place."
+        },
+        {
+          "text": "Every tree-test task in nav-proposal.md has a stated correct answer and a numeric success target",
+          "passed": true,
+          "evidence": "Checked all 12 rows at lines 165-176. Each has a Correct answer and a percentage: 1 Reports > All reports 80%; 2 Team or Settings > Team 80%; 3 and 4 Reports > Trends 70%; 5 Projects > Timeline 70%; 6 Projects > Calendar 70%; 7 Docs & Files > Files 70%; 8 Docs & Files > Docs 70%; 9 Docs & Files > Wiki 70%; 10 Settings > Integrations 70%; 11 Settings > Billing 70%; 12 Help > What's New 70%."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": "site-migration-redirects",
+      "eval_name": "site-migration-redirects",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.9,
+        "passed": 9,
+        "failed": 1,
+        "total": 10,
+        "time_seconds": 447.7,
+        "tokens": 202732,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every one of the 34 URLs in current-urls.txt appears in the redirect list with a destination or a 410",
+          "passed": false,
+          "evidence": "MECHANICAL RESULT: all 34 lines of current-urls.txt appear exactly once in section 8 (no missing lines, no duplicates, every path matches its input line), but only 32 of 34 have a destination, a kept-unchanged marker or a 410 (12 with a destination, 18 unchanged, 2 at 410). The other two rows have no destination: line 278 \"| 2 | `/?p=112` | Look up first (section 5) | 301 |\" and line 279 \"| 3 | `/?page_id=7` | Look up first (section 5) | 301 |\". The plan says so itself (line 11): \"those two redirects can't be finished until someone looks them up\". Not guessing is the right call and earns assertion 6, but 'every one ... with a destination or a 410' is literally not met on two rows."
+        },
+        {
+          "text": "Moved pages get 301 redirects, and the plan uses no 302 for a permanent move",
+          "passed": true,
+          "evidence": "Section 8 heading \"### 301: moved permanently (14)\" and every row in that table carries Status 301 (lines 278-291); pattern rules are 301 or 410 (lines 329-333). A search of the whole plan finds zero occurrences of \"302\"."
+        },
+        {
+          "text": "Old URLs with an obvious new equivalent are redirected to that equivalent, not to the homepage",
+          "passed": true,
+          "evidence": "Every old URL with an obvious equivalent goes to it: line 280 `/about-us.html` to `/about-us/`; line 281 `/About_Us/Our-Team` to `/about-us/leadership/`; line 282 `/services/change-management.php` to `/services/change-management/`; lines 285-287 dated posts to `/blog/<same slug>/`; line 290 `/resources/whitepapers/` to `/whitepapers/`. Check script: no redirect targets `/`. Line 272 states none goes to the home page."
+        },
+        {
+          "text": "The plan states URL rules covering lowercase, hyphens, no .html or .php extensions, and one trailing-slash form",
+          "passed": true,
+          "evidence": "URL rules table, lines 119-121: \"Case and separator | Lowercase kebab-case\" (lowercase and hyphens); \"Trailing slash | Yes, enforced, with a matching canonical tag on every page\" (one form); \"Extensions | None on pages. Downloads such as `.pdf` keep theirs\" (rules out .html and .php on pages)."
+        },
+        {
+          "text": "The proposed sitemap labels each page or URL pattern with a template type, or the plan includes a content model",
+          "passed": true,
+          "evidence": "Both conditions are met. All 27 sitemap rows (lines 63-90) carry a template label in a second column, 13 distinct types such as `section-hub`, `service`, `case-study`, `post`, `person`. A \"### Content model\" table (lines 128-143) gives template, URL pattern, fields and relations."
+        },
+        {
+          "text": "The plan handles the ?p=112 and ?page_id=7 URLs explicitly, with a stated way to resolve them",
+          "passed": true,
+          "evidence": "Section 5 \"Finish the two WordPress ID redirects\" (lines 156-167): gives `curl -sI \"https://www.northgateadvisory.com/?p=112\" | grep -i '^location'` and the same for page_id=7, a fallback to `/wp-admin/post.php?post=112&action=edit`, and says to use the page's new URL \"so there's no chain\". It also warns that path-based files \"would read `/?p=112` as `/`\" and says what to do if the host can't match query strings."
+        },
+        {
+          "text": "The plan handles the PDF under wp-content/uploads explicitly",
+          "passed": true,
+          "evidence": "Line 291: \"| 30 | `/wp-content/uploads/2022/03/Operations-Benchmark-Report.pdf` | `/whitepapers/operations-benchmark-report.pdf` | 301 | Leaves the WordPress path; PDF to PDF, so links still deliver the document |\". Also in the sitemap (line 82), the file is a `file` template, and line 176 covers other uploads."
+        },
+        {
+          "text": "No redirect target in the list is itself the source of another redirect",
+          "passed": true,
+          "evidence": "MECHANICAL RESULT: 16 concrete targets (12 table rows and 4 pattern rules) tested against 19 sources (12 redirect rows, 2 410 rows, 5 pattern rules), wildcards expanded: 0 chains. The checker's matchers passed negative controls. The two pending rows have no target yet; line 165 instructs using the \"**new** URL as the destination, so there's no chain\". No shippable file exists to consider."
+        },
+        {
+          "text": "The plan says how to test the redirects before launch, such as crawling the old URLs and checking status codes",
+          "passed": true,
+          "evidence": "Launch checklist step 6 (line 215): \"Crawl every old URL against staging. Each must return the status in section 8 in one hop and end on a 200, with no loops and nothing landing on the home page.\" Step 8 (line 220) re-crawls on the live domain. Minor wrinkle: a 410 row cannot end on a 200, and unchanged rows take no hop, but the before-launch crawl and status check are clearly stated."
+        },
+        {
+          "text": "Any shippable redirect file in migration-plan.md implements every redirected row of its mapping table, or marks each missing row as pending with a reason",
+          "passed": true,
+          "evidence": "MECHANICAL RESULT: vacuously true. The plan's only code blocks are the sitemap tree and two curl commands; 0 blocks are in any redirect-file syntax, and line 325 says \"wildcard syntax depends on your host\". Section 8's tables are the list, and the two rows without a target are marked \"Look up first (section 5)\" with the reason \"WordPress post ID; destination unknown until checked\" (lines 278-279). See eval_feedback: a plan with no file cannot fail this."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": "blog-taxonomy-from-corpus",
+      "eval_name": "blog-taxonomy-from-corpus",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.56,
+        "passed": 5,
+        "failed": 4,
+        "total": 9,
+        "time_seconds": 419.0,
+        "tokens": 193030,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "ia-proposal.md assigns every one of the 24 posts to a category, with no post missing or left unassigned",
+          "passed": false,
+          "evidence": "Script: 24 rows found, but the freelance post is not under a defined category: rows not under a defined category [('2025-08-15-workshop-pricing-for-freelancers.md', 'Outside the categories (1)', line 110)]. Per heading: Team Meetings 5, Offsites & Workshops 7, Activities 7, Team Dynamics 4, Outside the categories 1. Result 23 of 24 assigned. Line 114 is explicit: \"Give it no category or tags and leave it off the category pages and homepage.\" The fallback in the same paragraph (\"If your blog software insists on a category, Offsites & Workshops is the closest fit\") is conditional and is not the assignment."
+        },
+        {
+          "text": "ia-proposal.md presents at least two alternative ways to organize the posts before recommending one",
+          "passed": false,
+          "evidence": "The recommended scheme comes first. Line 3 recommends it, and lines 18-35 set it out in detail (four-row category table with intro lines and counts, plus the five-step sorting rule). The alternatives appear only afterwards at lines 39-43 under \"What I rejected\", as three one-sentence dismissals (content type, a Remote category, before/during/after). They are neither laid out nor compared before the scheme is detailed, and there is no side-by-side."
+        },
+        {
+          "text": "ia-proposal.md merges tips, Tips and \"facilitation tips\" into one term (or retires all three) rather than keeping two or more of them",
+          "passed": true,
+          "evidence": "All three are deleted, lines 121-123: \"tips | 2 | Delete. Do not merge the three variants into one tag\", \"Tips | 2 | Delete.\", \"facilitation tips | 4 | Delete.\" None is in the seven-tag list at lines 51-57."
+        },
+        {
+          "text": "ia-proposal.md retires the misc tag, and its recommended scheme has no misc, other or uncategorized category",
+          "passed": true,
+          "evidence": "Line 120: \"misc | 4 | Delete. It says nothing about the post.\" The four defined categories (lines 24-27) include no misc, other or uncategorized, and line 35 says \"Do not create a catch-all.\" \"Outside the categories\" (line 106) holds one post and is explicitly not a category; that gap is penalised under the assignment assertion."
+        },
+        {
+          "text": "ia-proposal.md does not present user research results (card sort percentages, tree test scores, participant quotes) as if they had been collected",
+          "passed": true,
+          "evidence": "No results are claimed. Line 156: \"This is a desk check against the posts, not a test with real readers.\" Line 210: \"I had no analytics, search logs or reader research.\" The quoted reader thoughts at lines 160-169 are introduced as \"ten likely reader questions\", not participant quotes. There are no card sort percentages or tree test scores. Unsupported remarks such as \"it is the word people search for\" (line 135) are assertions, not presented as study results, and are listed under claims."
+        },
+        {
+          "text": "ia-proposal.md includes a way to test the scheme with readers, such as a card sort or a tree test with tasks",
+          "passed": true,
+          "evidence": "Line 173: \"give a handful of readers three or four of the questions above to see where they would click.\" The questions are a 10-row table of tasks with expected destinations (lines 158-169). That is a task-based test with readers. It is thin: one sentence, no sample size beyond \"a handful\" and no success threshold."
+        },
+        {
+          "text": "ia-proposal.md gives a rule or an owner for adding new tags in future, such as checking for a near-duplicate before creating one",
+          "passed": true,
+          "evidence": "Lines 179-181 state rules: \"A new tag needs three posts that would use it.\", \"No tag that describes the whole blog.\" Line 183 adds a build check that fails \"on any tag not on the list\". No owner is named, but the assertion accepts a rule or an owner."
+        },
+        {
+          "text": "ia-proposal.md keeps categories and tags separate: each post gets one primary category, and tags are a separate dimension",
+          "passed": false,
+          "evidence": "Fails on the clause \"each post gets one primary category\": line 114 gives the freelance post \"no category or tags\", so 23 of 24 posts have one and one has none. The dimension separation itself holds: line 20 \"Every post gets exactly one\", a separate seven-tag list, and script finds no post in two categories and no tag identical to a category. The failure comes only from that one post."
+        },
+        {
+          "text": "The category totals and the rules stated in ia-proposal.md match its own post-by-post assignment table, with no contradiction",
+          "passed": false,
+          "evidence": "Totals match: script counts 5,7,7,4 equal the table at lines 24-27 and the headings, all seven tag totals at lines 51-57 match, \"at least three posts\" holds (minimum 3), zero to three tags holds (0:5, 1:12, 2:6, 3:1), and \"Five posts have no tag\" holds. The stated rule does not: line 20 says of categories \"Every post gets exactly one\" and line 177 repeats \"One category per post\", while line 106 lists a post \"Outside the categories\" and line 114 says \"Give it no category\". That is a direct contradiction between a stated rule and the assignment table."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": "saas-sidebar-restructure",
+      "eval_name": "saas-sidebar-restructure",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.6,
+        "passed": 6,
+        "failed": 4,
+        "total": 10,
+        "time_seconds": 226.3,
+        "tokens": 157965,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The proposed primary sidebar has seven or fewer top-level items",
+          "passed": false,
+          "evidence": "The sketch at lines 20-29 has eight rows above the pinned footer: Dashboard, My Tasks, Projects, Timeline, Calendar, Reports, Docs & Files, Team. Line 3 and line 40 put the sidebar at ten destinations (\"With ten rows in small clusters\"). Even excluding the footer, eight exceeds the cap of seven."
+        },
+        {
+          "text": "Billing, Settings, Help and What's New are moved out of the primary list into a utility, account or footer area",
+          "passed": true,
+          "evidence": "Lines 32-35: Settings and Help are \"(pinned to the bottom)\". Line 64 moves Billing to \"Settings, Billing\" and line 67 moves What's New to the \"Help menu\". Line 38: \"The footer holds account and support items\"."
+        },
+        {
+          "text": "Reports, Analytics and Insights are no longer three separate top-level items",
+          "passed": true,
+          "evidence": "Line 3: \"Reports, Analytics and Insights become one Reports area.\" Lines 56-57 show Analytics and Insights as tabs that lose their rows."
+        },
+        {
+          "text": "Team and People are no longer two separate top-level items",
+          "passed": true,
+          "evidence": "Line 3: \"Team and People become one Team area.\" Line 62: People is \"Team, Members tab (first tab)\" and \"Loses its row\"."
+        },
+        {
+          "text": "nav-proposal.md names one specific location for exporting a report",
+          "passed": true,
+          "evidence": "Line 71: \"Every report opens with a labelled Export button in the same spot in the page header, outside any 'more' menu.\" That is a concrete location, though the same line adds further Export controls on the Analytics and Insights tabs and in list rows."
+        },
+        {
+          "text": "nav-proposal.md names one specific location for inviting a teammate",
+          "passed": true,
+          "evidence": "Line 73: \"The pinned 'Invite teammates' row opens one dialog over the current page, from anywhere in the product.\" It is drawn at line 33 and headlined in the recommendation at line 3, so a concrete location is named. Passes on that basis only; the spread across four entry points is what fails the canonical-home assertion."
+        },
+        {
+          "text": "nav-proposal.md includes tree-test tasks written as user goals, with success targets",
+          "passed": true,
+          "evidence": "Line 106: \"Use the two complaint tasks plus tasks for everything that moved: connect an integration, update the payment card, find a procedure in the wiki, see what shipped recently, and find a chart of last month's work. Aim for at least 80% reaching the right place on export and invite, with no moved item losing more than 10 points against today.\" A thin pass: the tasks are goal-phrased and targets exist, but this is one inline sentence, the two main tasks are only referred to, and 'find a procedure in the wiki' gives away the label."
+        },
+        {
+          "text": "nav-proposal.md does not present invented usage data or test results as fact",
+          "passed": false,
+          "evidence": "Usage frequency is stated flatly, without a hedge. Line 13: \"The list also gives equal weight to things used hourly and things used once a year\". Line 3: \"The five rows that carry daily work\". Line 81: \"these are well-understood words on the most used part of the sidebar\". The disclaimer at line 7 (\"I have not seen usage data\") scopes itself to the structure and to guesses about what a page does, and none of these three statements appears in the Assumptions table (lines 91-98). Line 7 also shows the author knew no such data existed."
+        },
+        {
+          "text": "nav-proposal.md names one canonical home for exporting a report and one for inviting a teammate, and says any other entry points lead to those homes",
+          "passed": false,
+          "evidence": "No canonical home is named for either task. Invite: line 73 presents equal routes, \"There are four ways in and one dialog to maintain\", and the dialog opens over any page, so it is not a place; line 62 separately calls Team, Members the home of \"the Invite button\", leaving two candidates. Export: line 71 adds parallel buttons (\"The Analytics and Insights tabs carry the same button\", \"Rows in the report list also offer Export\") and never says these lead to a primary location."
+        },
+        {
+          "text": "Every tree-test task in nav-proposal.md has a stated correct answer and a numeric success target",
+          "passed": false,
+          "evidence": "Line 106 states no correct answer for any of the seven tasks. An absolute numeric target exists only for export and invite (80%). The five other tasks share one relative condition, \"no moved item losing more than 10 points against today\", with no target of their own."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": "site-migration-redirects",
+      "eval_name": "site-migration-redirects",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 8,
+        "failed": 2,
+        "total": 10,
+        "time_seconds": 363.8,
+        "tokens": 177498,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every one of the 34 URLs in current-urls.txt appears in the redirect list with a destination or a 410",
+          "passed": false,
+          "evidence": "MECHANICAL RESULT: all 34 lines of current-urls.txt appear exactly once in section 3 (no missing lines, no duplicates, every path matches its input line), but only 32 of 34 have a destination, a kept-unchanged marker or a 410 (13 with a destination, 19 unchanged). The other two rows have no destination: line 113 \"| 2 | `/?p=112` | Unknown until looked up |\" and line 114 \"| 3 | `/?page_id=7` | Unknown until looked up |\". The plan's summary counts them separately (line 13, \"Can't be mapped until someone looks them up on the live WordPress site | 2\"). Not guessing is the right call and earns assertion 6, but 'every one ... with a destination or a 410' is literally not met on two rows."
+        },
+        {
+          "text": "Moved pages get 301 redirects, and the plan uses no 302 for a permanent move",
+          "passed": true,
+          "evidence": "Line 107: \"All redirects are 301s.\" Line 12: \"Get a permanent (301) redirect to a new URL | 13\". Check script: all 14 live rules in the `_redirects` file have status 301, and the two commented-out ID rules are also 301!. A search of the whole plan finds zero occurrences of \"302\"."
+        },
+        {
+          "text": "Old URLs with an obvious new equivalent are redirected to that equivalent, not to the homepage",
+          "passed": true,
+          "evidence": "Every old URL with an obvious equivalent goes to it: line 120 `/about-us.html` to `/about-us/`; line 121 `/About_Us/Our-Team` to `/about-us/leadership/`; line 122 `/services/change-management.php` to `/services/change-management/`; lines 125-127 dated posts to `/blog/<same slug>/`. Check script: no table row or file rule targets `/`. Line 107: \"Nothing goes to the home page\"."
+        },
+        {
+          "text": "The plan states URL rules covering lowercase, hyphens, no .html or .php extensions, and one trailing-slash form",
+          "passed": true,
+          "evidence": "Section 2 URL rules: rule 3 (line 94) \"Lowercase letters and hyphens only. No underscores and no `.html` or `.php`.\" Rule 4 (line 95) \"Every page ends in a trailing slash, matching what WordPress used\", with the slashless version redirecting to it."
+        },
+        {
+          "text": "The proposed sitemap labels each page or URL pattern with a template type, or the plan includes a content model",
+          "passed": false,
+          "evidence": "Neither condition is met. A search of the plan finds zero occurrences of \"template\" and zero of \"content model\". The sitemap (lines 57-81) has only occasional notes such as \"Overview of all services\", \"NEW hub page\" and \"One listing page\", and most rows have no label at all. URL rule 6 (line 97) lists path patterns but assigns them no template type."
+        },
+        {
+          "text": "The plan handles the ?p=112 and ?page_id=7 URLs explicitly, with a stated way to resolve them",
+          "passed": true,
+          "evidence": "Section 1 \"Two links point at WordPress ID numbers\" (lines 34-40): \"Open each address in a browser, and WordPress will forward you to the page's real address. Find that address in section 3, then put its new URL into the two commented-out lines at the top of section 4.\" It is flagged as a must-do while WordPress runs, and rows 2-3 appear in table 3a."
+        },
+        {
+          "text": "The plan handles the PDF under wp-content/uploads explicitly",
+          "passed": true,
+          "evidence": "Line 132: \"| 30 | `/wp-content/uploads/2022/03/Operations-Benchmark-Report.pdf` | `/resources/whitepapers/operations-benchmark-report.pdf` |\", implemented in the redirect file at line 180. Line 212 covers other uploads, and assumption 8 (line 268) says what changes if the PDF goes behind a form."
+        },
+        {
+          "text": "No redirect target in the list is itself the source of another redirect",
+          "passed": true,
+          "evidence": "MECHANICAL RESULT: 27 concrete targets (13 table rows and 14 `_redirects` rules) tested against 27 sources (13 table rows and 14 rules), wildcards and `:param` placeholders expanded: 0 chains. The checker's matchers passed negative controls. The two pending ID rows have no target yet; line 38 instructs putting in the page's new URL."
+        },
+        {
+          "text": "The plan says how to test the redirects before launch, such as crawling the old URLs and checking status codes",
+          "passed": true,
+          "evidence": "Section 6 \"The test\" (lines 238-249) gives a runnable curl loop over current-urls.txt printing status, hops and final URL, with explicit pass criteria: \"every line ends in 200, the URLs in section 3c show 0 hops, the URLs in section 3b show exactly 1 hop, and each final address matches section 3\". The before-launch list requires it (line 227: \"Run the test below on staging.\")."
+        },
+        {
+          "text": "Any shippable redirect file in migration-plan.md implements every redirected row of its mapping table, or marks each missing row as pending with a reason",
+          "passed": true,
+          "evidence": "MECHANICAL RESULT: the `_redirects` block (lines 166-199) was run first-match against table 3b: 13 of 13 redirected rows implemented with the matching target and status 301, 0 problems. The two pending rows (3a) are commented out with a reason, lines 169-172: \"WordPress ID links. Fill in the target after the lookup, then remove the leading #.\""
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.9667,
+        "stddev": 0.0577,
+        "min": 0.9,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 499.7667,
+        "stddev": 107.0589,
+        "min": 428.7,
+        "max": 622.9
+      },
+      "tokens": {
+        "mean": 209740.0,
+        "stddev": 14933.8566,
+        "min": 199599,
+        "max": 226889
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.6533,
+        "stddev": 0.1286,
+        "min": 0.56,
+        "max": 0.8
+      },
+      "time_seconds": {
+        "mean": 336.3667,
+        "stddev": 99.2359,
+        "min": 226.3,
+        "max": 419.0
+      },
+      "tokens": {
+        "mean": 176164.3333,
+        "stddev": 17570.5024,
+        "min": 157965,
+        "max": 193030
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.31",
+      "time_seconds": "+163.4",
+      "tokens": "+33576"
+    }
+  },
+  "notes": [
+    "Same 29 checks and the same grader instructions as round 2. This round ran against the public copy of the skill, which includes the three edits made after round 2 and two passages reworded for licence reasons.",
+    "28 of 29 with the skill, 19 of 29 without. All six run transcripts were audited: every run used claude-opus-5-5, no run called the Skill tool, the no-skill runs opened no copy of the skill and no plugin folder, and the with-skill runs read only the public copy. The audit mattered this round because the installed skill is now visible to Claude; in rounds 1 and 2 it was hidden.",
+    "The one with-skill failure is shared by the no-skill run: the same check on the same two rows, /?p=112 and /?page_id=7, which both runs mark as needing a WordPress lookup. The grader read 'a destination or a 410' literally. Round 2's grader accepted almost the same answer ('New URL of post 112', after lookup). Scored as graded here. If a named lookup counts as a destination, the scores are 29 and 20.",
+    "The three doubts graders raised after round 2 did not recur: the with-skill sidebar states specific click paths instead of a blanket claim, has no unhedged frequency words, and the with-skill blog run delivers 10 controlled tags. One run each, so this is consistent with the edits working, not proof.",
+    "The no-skill score moved from 22 to 19 between rounds with nothing about it changed, and four checks flipped (three pass to fail, one fail to pass). Treat differences of a few checks as noise.",
+    "Cost: about 49% longer on average (500s vs 336s) and about 19% more tokens (209,740 vs 176,164). Round 2 was 73% and 26%. A fresh subagent starts near 115k tokens of context in both configurations, so the skill's added cost is about 33,600 tokens per run.",
+    "Graders' judgment calls, recorded in eval_feedback: the with-skill blog run's opening summary table could count as setting out the scheme before comparing alternatives (8 of 9 if so); the no-skill blog run fails 'one primary category' on a literal clause (6 of 9 if not); two no-skill sidebar passes are thin; and the redirect-file check passes vacuously for the with-skill migration run, which shipped no redirect file, while the no-skill run did ship one and no check rewards it."
+  ]
+}

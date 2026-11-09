@@ -1,0 +1,15 @@
+{
+  "eval_name": "blog-taxonomy-from-corpus",
+  "prompt": "I run a small blog about workshop facilitation and meetings. All the posts are in the posts/ folder (markdown with front matter). The tags have turned into a mess: some posts are tagged misc, and I've got tips, Tips and \"facilitation tips\" all floating around. Most of my readers are team leads who end up running their own meetings and offsites, not professional facilitators. I want to reorganize the blog so they can actually find things. Can you propose a set of categories and tags, tell me which category each post goes in, and save the whole proposal as ia-proposal.md?\n\nInput files: posts/",
+  "assertions": [
+    "ia-proposal.md assigns every one of the 24 posts to a category, with no post missing or left unassigned",
+    "ia-proposal.md presents at least two alternative ways to organize the posts before recommending one",
+    "ia-proposal.md merges tips, Tips and \"facilitation tips\" into one term (or retires all three) rather than keeping two or more of them",
+    "ia-proposal.md retires the misc tag, and its recommended scheme has no misc, other or uncategorized category",
+    "ia-proposal.md does not present user research results (card sort percentages, tree test scores, participant quotes) as if they had been collected",
+    "ia-proposal.md includes a way to test the scheme with readers, such as a card sort or a tree test with tasks",
+    "ia-proposal.md gives a rule or an owner for adding new tags in future, such as checking for a near-duplicate before creating one",
+    "ia-proposal.md keeps categories and tags separate: each post gets one primary category, and tags are a separate dimension",
+    "The category totals and the rules stated in ia-proposal.md match its own post-by-post assignment table, with no contradiction"
+  ]
+}
