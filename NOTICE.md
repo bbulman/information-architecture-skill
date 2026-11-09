@@ -1,10 +1,10 @@
 # Notices
 
-This skill combines ideas from the sources below in new wording.
+These skills combine ideas from the sources below in new wording.
 
 ## RavenClaude
 
-The guidance on sitemap shapes, URL rules, navigation surfaces, content models and redirects draws on `plugins/web-design/skills/information-architecture` in [RavenClaude](https://github.com/mcorbett51090/RavenClaude), used under this licence:
+The guidance on sitemap shapes, URL rules, navigation surfaces, content models and redirects, now in the `sitemaps`, `url-structure`, `navigation`, `content-models` and `redirect-maps` skills, draws on `plugins/web-design/skills/information-architecture` in [RavenClaude](https://github.com/mcorbett51090/RavenClaude), used under this licence:
 
 ```
 MIT License

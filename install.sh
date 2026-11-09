@@ -1,33 +1,35 @@
 #!/usr/bin/env bash
-# Installs the information-architecture skill into Claude Code.
+# Installs the information architecture skills into Claude Code.
 #
 #   ./install.sh      installs into ~/.claude (set CLAUDE_DIR to install elsewhere)
 #
-# An existing skill of this name is kept as backups/information-architecture.<stamp>/,
+# An existing skill with one of these names is kept as backups/<name>.<stamp>/,
 # outside skills/ so the copy doesn't load as a second skill.
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 CLAUDE_DIR="${CLAUDE_DIR:-$HOME/.claude}"
 STAMP="$(date +%Y%m%d-%H%M%S)"
-TARGET="$CLAUDE_DIR/skills/information-architecture"
 
-echo "Installing the information-architecture skill into $CLAUDE_DIR"
+echo "Installing the information architecture skills into $CLAUDE_DIR"
 mkdir -p "$CLAUDE_DIR/skills"
-if [ -e "$TARGET" ]; then
-  mkdir -p "$CLAUDE_DIR/backups"
-  mv "$TARGET" "$CLAUDE_DIR/backups/information-architecture.$STAMP"
-  echo "  kept the old skill as backups/information-architecture.$STAMP"
-fi
-cp -R "$HERE/skills/information-architecture" "$TARGET"
-echo "  wrote skills/information-architecture/"
 
-echo "Checking"
-if grep -q '^name: information-architecture$' "$TARGET/SKILL.md"; then
-  echo "  SKILL.md is in place"
-else
-  echo "  SKILL.md is missing or has the wrong name" >&2
-  exit 1
-fi
+count=0
+for source in "$HERE"/skills/*/; do
+  name="$(basename "$source")"
+  target="$CLAUDE_DIR/skills/$name"
+  if [ -e "$target" ]; then
+    mkdir -p "$CLAUDE_DIR/backups"
+    mv "$target" "$CLAUDE_DIR/backups/$name.$STAMP"
+    echo "  kept the old $name as backups/$name.$STAMP"
+  fi
+  cp -R "$source" "$target"
+  if ! grep -q "^name: $name\$" "$target/SKILL.md"; then
+    echo "  $name: SKILL.md is missing or has the wrong name" >&2
+    exit 1
+  fi
+  count=$((count + 1))
+done
+echo "  wrote $count skills, each with its SKILL.md in place"
 
 echo
 echo "Next: open a new Claude Code session, then describe the problem or run /information-architecture."

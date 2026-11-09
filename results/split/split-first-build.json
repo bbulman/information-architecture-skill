@@ -1,0 +1,294 @@
+{
+ "model": "claude-opus-5-5",
+ "runs_per_case": 1,
+ "judge": "sonnet",
+ "cases": {
+  "blog-taxonomy-from-corpus": {
+   "passed": 9,
+   "of": 9,
+   "seconds": 294,
+   "turns": 9,
+   "checks": [
+    {
+     "check": "01-every-post-assigned",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "02-offers-alternatives",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "03-merges-tip-tags",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "04-retires-misc",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "05-no-invented-research",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "06-validation-plan",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "07-tag-governance",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "08-category-vs-tag",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "09-agrees-with-itself",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    }
+   ]
+  },
+  "saas-sidebar-restructure": {
+   "passed": 9,
+   "of": 10,
+   "seconds": 168,
+   "turns": 6,
+   "checks": [
+    {
+     "check": "01-primary-seven-or-fewer",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "02-utility-items-moved",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "03-reports-consolidated",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "04-team-people-merged",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "05-one-home-export",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "06-one-home-invite",
+     "passed": false,
+     "votes": [
+      false,
+      false,
+      false
+     ]
+    },
+    {
+     "check": "07-tree-test-tasks",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "08-no-invented-data",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "09-canonical-homes",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "10-tasks-have-answers",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    }
+   ]
+  },
+  "site-migration-redirects": {
+   "passed": 8,
+   "of": 10,
+   "seconds": 216,
+   "turns": 12,
+   "checks": [
+    {
+     "check": "01-every-url-mapped",
+     "passed": false,
+     "votes": [
+      false,
+      false,
+      false
+     ]
+    },
+    {
+     "check": "02-uses-301-not-302",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "03-no-homepage-dumping",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "04-url-rules-stated",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "05-template-types",
+     "passed": false,
+     "votes": [
+      false,
+      false,
+      false
+     ]
+    },
+    {
+     "check": "06-query-string-ids",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "07-pdf-handled",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "08-no-redirect-chains",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "09-pre-launch-check",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "check": "10-redirect-file-complete",
+     "passed": true,
+     "votes": [
+      true,
+      true,
+      true
+     ]
+    }
+   ]
+  }
+ },
+ "passed": 26,
+ "of": 29
+}
