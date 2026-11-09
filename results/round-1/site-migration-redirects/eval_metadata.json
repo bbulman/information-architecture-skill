@@ -1,0 +1,15 @@
+{
+  "eval_name": "site-migration-redirects",
+  "prompt": "We're a 15-person management consulting firm (Northgate Advisory). Our site is on WordPress and we're rebuilding it as a static site. current-urls.txt is every URL from our old sitemap plus a few odd ones from Google Search Console. Please plan the new site structure and URL scheme, and give me the full redirect list so we don't lose our Google rankings when we switch. Put it all in migration-plan.md.\n\nInput files: current-urls.txt",
+  "assertions": [
+    "Every one of the 34 URLs in current-urls.txt appears in the redirect list with a destination or a 410",
+    "Moved pages get 301 redirects, and the plan uses no 302 for a permanent move",
+    "Old URLs with an obvious new equivalent are redirected to that equivalent, not to the homepage",
+    "The plan states URL rules covering lowercase, hyphens, no .html or .php extensions, and one trailing-slash form",
+    "The proposed sitemap labels each page or URL pattern with a template type, or the plan includes a content model",
+    "The plan handles the ?p=112 and ?page_id=7 URLs explicitly, with a stated way to resolve them",
+    "The plan handles the PDF under wp-content/uploads explicitly",
+    "No redirect target in the list is itself the source of another redirect",
+    "The plan says how to test the redirects before launch, such as crawling the old URLs and checking status codes"
+  ]
+}

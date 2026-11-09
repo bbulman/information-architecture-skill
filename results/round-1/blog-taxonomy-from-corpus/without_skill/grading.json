@@ -1,0 +1,109 @@
+{
+  "expectations": [
+    {
+      "text": "ia-proposal.md assigns every one of the 24 posts to a category, with no post missing or left unassigned",
+      "passed": true,
+      "evidence": "Mechanical check with check_assign.py (lists the 24 slugs from posts/*.md filenames, reads each post's front-matter title, finds the row for that title in every markdown table with Post and Category columns, and checks the Category cell is one of the proposal's own defined categories): RESULT 24/24 posts assigned to a valid category (Post-by-post assignment table, lines 91-114). The pricing post is at line 113 in 'For facilitators', a defined (footer-only) category. Cross-check: Appendix B (lines 238-261) has exactly one row per filename slug, 24 rows matched, each with a category. Line 116 totals: Meetings 5, Offsites & workshops 7, Activities 7, People & dynamics 4, For facilitators 1."
+    },
+    {
+      "text": "ia-proposal.md presents at least two alternative ways to organize the posts before recommending one",
+      "passed": false,
+      "evidence": "The categories are set out first (Summary line 7; 'Categories' table at line 37; sorting rules at line 45). Alternatives appear only afterwards, in 'Why these categories and not another set' (lines 57-63), as three one-sentence dismissals: session type ('fails for half the blog'), phase ('how facilitators think'), content type ('leaves \"my weekly meeting is dull\"... with nowhere obvious to go'). They are a post-hoc justification of a scheme already presented, not alternatives laid out and weighed before the recommendation, and none is applied to the posts with counts. The burden of proof for 'before recommending one' is not met."
+    },
+    {
+      "text": "ia-proposal.md merges tips, Tips and \"facilitation tips\" into one term (or retires all three) rather than keeping two or more of them",
+      "passed": true,
+      "evidence": "Line 8: 'Six old tags are retired outright: tips, Tips, facilitation tips, misc, leadership and beginners.' Line 124: 'tips, Tips, facilitation tips | Retired: every post is a tip | Start here page'. Line 19 explains that merging the spellings would not fix the problem. None of the three is in the new tag list (lines 69-83)."
+    },
+    {
+      "text": "ia-proposal.md retires the misc tag, and its recommended scheme has no misc, other or uncategorized category",
+      "passed": true,
+      "evidence": "Line 125: 'misc | Retired: posts now have real categories | Blog home'. Rule 1 (line 154): 'There is no misc, \"general\" or \"uncategorized\" option.' Line 55: a post that fits nowhere 'is never a reason to bring back misc'. The five categories (lines 39-43) contain no misc/other/uncategorized bucket; 'For facilitators' is a scoped category for a named second audience."
+    },
+    {
+      "text": "ia-proposal.md does not present user research results (card sort percentages, tree test scores, participant quotes) as if they had been collected",
+      "passed": true,
+      "evidence": "No percentages, scores or participant quotes are presented as collected data (a grep for '%', 'participant' and 'respondent' finds nothing). Line 168: 'The labels come from judgment, not reader data. I had no search or analytics data.' The quoted reader phrases at lines 29-31 ('My weekly meeting is dull.') are illustrative and not attributed to research, though 'They tend to arrive with one of three things in mind' is an unsourced behavioural claim."
+    },
+    {
+      "text": "ia-proposal.md includes a way to test the scheme with readers, such as a card sort or a tree test with tasks",
+      "passed": true,
+      "evidence": "Line 168 (inside Assumptions): 'A quick, cheap check: give five team leads six tasks, such as \"find help with one person dominating the meeting\", and see which category they pick first.' That is a first-click/tree-test design with readers and tasks, so it meets the assertion. It is minimal: one sentence, one of the six tasks written, no success threshold, and it is framed around testing one label rather than the whole scheme."
+    },
+    {
+      "text": "ia-proposal.md gives a rule or an owner for adding new tags in future, such as checking for a near-duplicate before creating one",
+      "passed": true,
+      "evidence": "'Rules to keep it clean', rule 5 (line 158): 'Only add a new tag if all four of these hold: you expect at least three posts on it within a year; it isn't a synonym of an existing tag; it isn't a category; and it uses the words a team lead would use.' Rule 2 (line 155) adds a build check that fails on any tag not in the data file; rule 6 sets an annual review. No owner is named, but the near-duplicate rule satisfies the assertion."
+    },
+    {
+      "text": "ia-proposal.md keeps categories and tags separate: each post gets one primary category, and tags are a separate dimension",
+      "passed": true,
+      "evidence": "Summary line 7: 'Five categories, exactly one per post.' Line 67: tags 'cut across categories'. Rule 5 (line 158) forbids a tag that 'is a category'. The front matter (Appendix B) has a single 'category:' field and a separate 'tags:' list for every post, and no tag slug duplicates a category slug (categories: meetings, offsites-and-workshops, activities, people-and-dynamics, for-facilitators; tags: 13 different slugs)."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 1,
+    "total": 8,
+    "pass_rate": 0.88
+  },
+  "timing": {
+    "executor_duration_seconds": 335.8,
+    "total_duration_seconds": 335.8
+  },
+  "claims": [
+    {
+      "claim": "26 distinct tags on 24 posts; 12 appear on a single post",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Recounted from posts/*.md front matter: 26 distinct, 12 single-use, and the twelve named match."
+    },
+    {
+      "claim": "Tag uses drop from 51 to 37, and no tag sits on more than 5 of the 24 posts",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Appendix B totals 37 tag uses; the largest is participation at 5. Per-tag counts in the tags table (lines 71-83) all match Appendix B."
+    },
+    {
+      "claim": "'Six old tags are retired outright' (line 8)",
+      "type": "factual",
+      "verified": false,
+      "evidence": "The redirect table also retires 'design sprint' (line 140) and 'tools' (line 141), each 'Retired: one post', so eight old tags are retired, not six."
+    },
+    {
+      "claim": "retrospectives and conflict are 'deliberate exceptions to the rule that a tag needs at least two posts' (line 85)",
+      "type": "factual",
+      "verified": false,
+      "evidence": "The document's own rule 5 (line 158) requires an expected three posts, and rule 6 folds tags under three posts at review; brainstorming and big-groups have only 2 posts each, so four tags, not two, sit below the stated bar."
+    },
+    {
+      "claim": "Six posts are about team meetings, but only four carry the meetings tag; the other two were tagged misc",
+      "type": "factual",
+      "verified": true,
+      "evidence": "meetings is on parking lot, Lean Coffee, check-in questions and meeting cost (4); retro and hybrid fairness carry misc and are meeting posts."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "ia-proposal.md presents at least two alternative ways to organize the posts before recommending one",
+        "reason": "\"before recommending one\" is ambiguous for summary-first documents: both runs state their recommendation in the opening summary. I graded on the body order (options laid out and weighed, then the recommendation) and on whether the alternatives were worked against the posts. Rewording to \"lays out at least two alternative schemes, tests each against the posts, and says why the recommended one beats them\" would make the verdict mechanical rather than a judgment call."
+      },
+      {
+        "assertion": "ia-proposal.md includes a way to test the scheme with readers, such as a card sort or a tree test with tasks",
+        "reason": "One sentence satisfies it: the baseline passed with a single line inside its Assumptions section (five team leads, six tasks, one of them written out, no success threshold). Requiring at least five tasks written in the reader's words plus a pass criterion would separate a real validation plan from a mention."
+      },
+      {
+        "assertion": "ia-proposal.md assigns every one of the 24 posts to a category, with no post missing or left unassigned",
+        "reason": "The with-skill run failed this by a deliberate, argued choice (unlisting the off-audience freelance pricing post rather than forcing it into a category). The assertion is consistent with the user's request (\"tell me which category each post goes in\"), so keep it, but decide explicitly whether an argued 'unlisted' disposition should count; as written it does not."
+      },
+      {
+        "reason": "No assertion checks internal consistency. The with-skill run's own governance baseline says \"0 posts without a category\" and its front-matter model makes category \"required, exactly one\", while its assignment table leaves the pricing post with no category; it also says every borderline placement has a tree-test task, but the parking lot post has none. An assertion such as 'the proposal's counts and rules agree with its own post-by-post table' would catch this."
+      },
+      {
+        "reason": "Assertions 3, 4, 5, 7 and 8 passed for both runs, so they do not discriminate between the skill and the baseline on this case. The real differences (worked alternatives, validation depth, URL/migration detail) are only partly covered."
+      }
+    ],
+    "overall": "No transcript or metrics.json was available for either run, so grading is based on the deliverable alone, with timing from timing.json. The assignment check is mechanical and solid; assertions 2 and 6 need tighter wording to be discriminating, and nothing checks the proposal against itself."
+  }
+}

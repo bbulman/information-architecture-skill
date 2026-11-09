@@ -1,0 +1,106 @@
+{
+  "expectations": [
+    {
+      "text": "The proposed primary sidebar has seven or fewer top-level items",
+      "passed": true,
+      "evidence": "Line 7: 'Cut the sidebar from 18 items to 6: Home, My Tasks, Projects, Reports, Docs & Files, Team'. The navigation spec (line 167) labels the surface 'Primary (6)' with exactly those six. The tree (lines 110-146) also shows a workspace menu, search, an optional + New and per-person starred projects, but each is labelled as a menu, command palette or shortcut, not a primary destination. Governance (line 354) holds the list at 7 or fewer."
+    },
+    {
+      "text": "Billing, Settings, Help and What's New are moved out of the primary list into a utility, account or footer area",
+      "passed": true,
+      "evidence": "Tree lines 113-117: 'Workspace menu (workspace name) ... Settings ... Integrations ... Billing (admins only)'. Lines 139-145: 'SIDEBAR FOOTER ... Help (?) menu ... Help centre (was Help) ... What's New (was What's New; a dot on the ? when unread)'. Migration table rows 15-18 (lines 244-247) mark Billing, Settings, Help and What's New as 'Leaves the sidebar'. The workspace menu sits at the top of the sidebar rather than the footer, but it is explicitly a utility menu outside the primary six."
+    },
+    {
+      "text": "Reports, Analytics and Insights are no longer three separate top-level items",
+      "passed": true,
+      "evidence": "Tree lines 126-128: 'Reports ... reports-hub ... Insights (was Insights) at the top, then all reports', '<report> ... charts (was Analytics)'. Migration rows 7 and 8 (lines 236-237): Analytics and Insights 'Merged' into Reports, with 301s from /analytics and /insights to /reports."
+    },
+    {
+      "text": "Team and People are no longer two separate top-level items",
+      "passed": true,
+      "evidence": "Tree lines 133-135: 'Team ... team-hub ... Members (was People; Invite button) ... Groups (was Team)'. Migration rows 12 and 13 (lines 241-242) mark both as 'Merged' into Team, with /people redirecting to /team/members."
+    },
+    {
+      "text": "nav-proposal.md names one specific location for exporting a report",
+      "passed": true,
+      "evidence": "Line 184: 'Canonical home | Reports > any report > Export, in the action bar at the top right of every report, offering PDF and CSV'. Other entry points (project header, Home insight cards, search) are listed as paths that lead to that home, and the report template rule (line 208) says 'Export never goes in an overflow menu'."
+    },
+    {
+      "text": "nav-proposal.md names one specific location for inviting a teammate",
+      "passed": true,
+      "evidence": "Line 194: 'Canonical home | Team > Members > Invite, top right'. Line 202: 'Every path opens the same invite flow and the same member list, and none of them is a copy.' The footer link, assignee picker and admin paths are explicitly routed to Team > Members."
+    },
+    {
+      "text": "nav-proposal.md includes tree-test tasks written as user goals, with success targets",
+      "passed": true,
+      "evidence": "Section 7.2 (lines 316-329) is a table of 12 tasks with 'Correct answers' and 'Target success' columns, for example task 1: 'Your client wants last month's status update as a PDF before Friday's call. Where would you go to get it?' with target 80%. Line 314 states each task 'is written in the participant's words and avoids the target label'. Line 331 sets 80% for tasks 1 to 4 and 70% for the rest, plus a directness bar, and the test runs against the current tree as a baseline."
+    },
+    {
+      "text": "nav-proposal.md does not present invented usage data or test results as fact",
+      "passed": true,
+      "evidence": "Line 11: 'I have not seen the screens behind the labels, the tickets themselves, usage data or search logs.' Line 49 marks the hidden-action idea as 'a hypothesis to check, not a finding'. Line 284: 'I have not seen ticket volumes.' Line 214 marks routes as illustrative, and line 344 says to set the ticket target 'once the baseline exists' rather than inventing one. The only number-like figures are derived from the prompt (line 47: '5 of the 18 items (28%)'). Minor unhedged frequency wording exists (line 82: 'the four places they use most'; line 167: 'Daily items first ... weekly ones next'), but these are ordering rationale, not metrics, and the document says plainly it has no usage data. The section 9 rubric score ('averages about 3.8') is labelled as the author's own self-assessment, not a user test result."
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "total": 8,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 447.5,
+    "total_duration_seconds": 447.5
+  },
+  "claims": [
+    {
+      "claim": "Five of the 18 items (28%) are admin or product utility",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Integrations, Billing, Settings, Help, What's New are 5 of the 18 prompt items; 5/18 = 27.8%."
+    },
+    {
+      "claim": "Team and People are 12th and 13th of 18",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Matches the order given in the prompt."
+    },
+    {
+      "claim": "Every one of the 18 items gets exactly one new home",
+      "type": "factual",
+      "verified": false,
+      "evidence": "The migration table covers all 18 rows, but Calendar maps to 'Projects, Calendar view (and My Tasks)' (line 234) and Settings is split between the workspace menu and the account menu (line 245), so two items get two homes. Line 148 acknowledges that Calendar and Timeline are views in several places. The 'exactly one' wording overstates it; the mapping itself is complete."
+    },
+    {
+      "claim": "The proposal averages about 3.8 across the eleven scored criteria of a twelve-point rubric",
+      "type": "quality",
+      "verified": false,
+      "evidence": "Only three scores are shown (2, 3, 3) plus one N/A. The rubric and the other eight scores are not in the deliverable, so the average cannot be checked. It is presented as self-assessment, not as test data."
+    },
+    {
+      "claim": "Internal cross-references (Section 6 assumptions, Section 7 research, Section 8 additions, tree-test task 8 settles workload)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Section 6 (line 257) holds the assumptions table, 7.1 (line 300) the cheap research, section 8 (line 356) the likely additions, and task 8 (line 325) is the workload task."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "nav-proposal.md names one specific location for exporting a report",
+        "reason": "Ambiguous between 'at least one specific location' and 'one canonical location'. Both runs list several entry points; only this run designates a canonical home. If the skill teaches one home per concept, reword to 'designates a single canonical location for export, with any other entry points leading to it'. The same applies to the invite assertion."
+      },
+      {
+        "assertion": "nav-proposal.md includes tree-test tasks written as user goals, with success targets",
+        "reason": "Passes for a single blanket bar with no correct answers. This run gives per-task targets, correct-answer paths, a baseline on the current tree and a newcomer split; the other run gives none of the per-task detail and still passes. Require a stated correct destination and a numeric target for each task if that rigour is the point."
+      },
+      {
+        "assertion": "The proposed primary sidebar has seven or fewer top-level items",
+        "reason": "Does not say whether a workspace menu, search box, + New button or starred-projects list counts as a top-level item. Both runs add some of these; define what counts so the check cannot be passed by relabelling items as 'shortcuts'."
+      },
+      {
+        "reason": "No assertion checks that all 18 current items are mapped to a new home with redirects, or that the proposal compares alternatives. Both runs did these, so they would not discriminate here, but the assertion set as a whole does not separate the two runs (both pass 8/8) despite large differences in rigour: canonical homes, per-task test targets, a 301 table, governance rules and consistent hedging appear only in the with-skill run."
+      }
+    ],
+    "overall": "Assertions check that the obvious merges and moves happened, which any competent answer does. They do not discriminate between this run and the baseline. Tighten the export/invite and tree-test assertions and add one or two that test the skill's distinctive practices."
+  }
+}

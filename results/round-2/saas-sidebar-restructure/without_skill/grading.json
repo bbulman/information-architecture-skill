@@ -1,0 +1,125 @@
+{
+  "expectations": [
+    {
+      "text": "The proposed primary sidebar has seven or fewer top-level items",
+      "passed": true,
+      "evidence": "Line 5: 'Cut the sidebar from 18 items to 6 destinations plus three utility controls at the bottom (Invite people, Settings, Help).' Mockup lines 11-17 show Home, My Tasks, Projects, Reports, Docs & Files and Team, with Pinned and the utility row set apart below."
+    },
+    {
+      "text": "Billing, Settings, Help and What's New are moved out of the primary list into a utility, account or footer area",
+      "passed": true,
+      "evidence": "Band table, line 63: 'Utility | Invite people, Settings, Help', at the bottom. Mapping table lines 108-111: Billing to 'Settings, Billing & plan (admins only); also in the workspace menu'; Settings to 'Settings, bottom of sidebar'; Help to 'Help menu, bottom of sidebar'; What's New to 'Help menu, with a dot badge on Help'."
+    },
+    {
+      "text": "Reports, Analytics and Insights are no longer three separate top-level items",
+      "passed": true,
+      "evidence": "Line 73: 'Reports (absorbs Analytics and Insights). Three tabs': Reports, Dashboards (the former Analytics) and Insights. In the mapping table, Analytics and Insights are both marked 'Merged'."
+    },
+    {
+      "text": "Team and People are no longer two separate top-level items",
+      "passed": true,
+      "evidence": "Line 82: 'Team (absorbs People). Two tabs: Members ... and Workload'. Mapping table: 'People | Team, Members tab | Merged'."
+    },
+    {
+      "text": "nav-proposal.md names one specific location for exporting a report",
+      "passed": true,
+      "evidence": "Line 122: 'Every report and dashboard has a labelled Export button in the page header, not an icon and not an item in an overflow menu.' That is a specific location. The run also names a second report-export location in each project header (line 123) and a Settings 'Data export' page (line 124). The missing single home is penalised under the canonical-home assertion, not here."
+    },
+    {
+      "text": "nav-proposal.md names one specific location for inviting a teammate",
+      "passed": true,
+      "evidence": "Line 130: 'An Invite people button in the header of Team, Members.' Line 129: 'A persistent + Invite people control at the bottom of the sidebar, visible on every page.' Specific locations are named, five in all (lines 129-133). The missing single home is penalised under the canonical-home assertion."
+    },
+    {
+      "text": "nav-proposal.md includes tree-test tasks written as user goals, with success targets",
+      "passed": true,
+      "evidence": "Lines 169-179 give eight tasks written as goals: 'Export last month's budget report for your client Acme as a PDF', 'Invite a freelance designer who will work on one project', 'See everything due on Thursday across all your projects', 'Connect Slack', and so on. They carry a success target: 'at least 80 percent success on the export and invite tasks and should not do worse than the current tree on any other task.' Weaknesses: several tasks reuse the answer's own words ('Invite' matches the '+ Invite people' node, and 'budget report' matches Reports), and only two of the eight tasks have a numeric target."
+    },
+    {
+      "text": "nav-proposal.md does not present invented usage data or test results as fact",
+      "passed": false,
+      "evidence": "States usage frequency as fact with no hedge. Line 36: 'Billing, which one person opens a few times a year, sits at the same level and size as My Tasks, which everyone opens many times a day.' Line 60: 'Home, My Tasks | Used by everyone, many times a day.' Line 62: 'Agency PMs switch between client projects constantly.' All three sit outside the Assumptions section (lines 41-50), which does not cover frequency, and nothing marks them as assumed. This is the 'used every hour' pattern."
+    },
+    {
+      "text": "nav-proposal.md names one canonical home for exporting a report and one for inviting a teammate, and says any other entry points lead to those homes",
+      "passed": false,
+      "evidence": "Neither task gets a single canonical home. The summary (line 5) says each task 'gets a labelled button in every place a user is likely to look for it'. Export is offered as equal buttons on every report and dashboard header (line 122) and on each project header (line 123), plus a search action (line 125). Invite is listed as five parallel places: the sidebar '+ Invite people' (line 129), the Team > Members header (130), the workspace menu (131), 'Add people' on a project's member list (132), and Settings > Members & permissions 'with the same Invite button' (133). None is named as the home, and the others are not said to lead to one."
+    },
+    {
+      "text": "Every tree-test task in nav-proposal.md has a stated correct answer and a numeric success target",
+      "passed": false,
+      "evidence": "None of the eight tasks (lines 170-177) states a correct answer or destination node. Only the export and invite tasks have a numeric target ('at least 80 percent'). The other six get a relative target ('should not do worse than the current tree'), which is not numeric."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 3,
+    "total": 10,
+    "pass_rate": 0.7
+  },
+  "timing": {
+    "executor_duration_seconds": 166.5,
+    "total_duration_seconds": 166.5
+  },
+  "claims": [
+    {
+      "claim": "The sidebar goes from 18 items to 6 destinations plus three utility controls",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The mockup and the band table agree."
+    },
+    {
+      "claim": "The two ticket topics line up exactly with two of the three synonym clusters",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Export a report maps to Reports/Analytics/Insights and invite a teammate maps to Team/People, as the prompt describes."
+    },
+    {
+      "claim": "Billing is opened by one person a few times a year; My Tasks by everyone many times a day",
+      "type": "factual",
+      "verified": false,
+      "evidence": "The prompt gives no usage data, and the document admits at line 43 that it has seen none. Invented."
+    },
+    {
+      "claim": "Home is the convention in tools such as Asana and monday.com",
+      "type": "factual",
+      "verified": false,
+      "evidence": "An external claim that cannot be checked from the outputs; plausible, but uncited."
+    },
+    {
+      "claim": "Nothing is removed; every feature that exists today still exists",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The mapping table gives a new location for all 18 current items."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "nav-proposal.md names one specific location for exporting a report / nav-proposal.md names one specific location for inviting a teammate",
+        "reason": "These pass for any run that names a concrete location, including the without-skill run, which lists five parallel places to invite someone. The canonical-home assertion carries the real test, so these two add no discrimination. Drop them or reword to 'names exactly one location and treats the others as routes to it'."
+      },
+      {
+        "assertion": "nav-proposal.md does not present invented usage data or test results as fact",
+        "reason": "State whether a vague qualitative frequency word counts. The with-skill run says the five admin and support items 'are visited occasionally' with no in-sentence hedge; I passed it as a category description because it gives no figure and the document says repeatedly that no usage data exists. A stricter reading would fail it, and the verdict currently rests on grader judgment."
+      },
+      {
+        "assertion": "nav-proposal.md includes tree-test tasks written as user goals, with success targets",
+        "reason": "Nothing checks that tree-test tasks avoid the answer's own words, which is the main quality gap between the runs. The with-skill tasks avoid them ('give them access', not 'invite'; 'a graph', not 'Charts'). The without-skill tasks reuse them ('Invite a freelance designer' against the '+ Invite people' node, 'budget report' against 'Reports', 'Connect Slack'). Suggested assertion: no task contains the label of its correct node."
+      },
+      {
+        "assertion": "Every tree-test task in nav-proposal.md has a stated correct answer and a numeric success target",
+        "reason": "Say whether an approximate target on a control task ('Close to 100%') counts as numeric. I counted it, but a hard threshold (for example 95% or more) would remove the judgment call."
+      },
+      {
+        "reason": "No assertion checks that the proposal gives the full text tree a tree test would run on. The with-skill run supplies it (lines 208-247); the without-skill run gives only the top level and prose descriptions of tabs, so its tasks have no tree to be scored against. Internal consistency is also unchecked: the with-skill run claims every task's shortest path is one or two clicks, yet tasks 7 and 8 sit three levels deep."
+      }
+    ],
+    "overall": "Assertions 1 to 4 are structural and both runs pass them easily. Assertions 8 to 10 carry the discrimination. Assertions 5 and 6 are redundant with assertion 9, and assertions 8 and 10 each leave one judgment call that the wording should settle."
+  }
+}

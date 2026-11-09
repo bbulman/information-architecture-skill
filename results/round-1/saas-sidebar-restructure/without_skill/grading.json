@@ -1,0 +1,103 @@
+{
+  "expectations": [
+    {
+      "text": "The proposed primary sidebar has seven or fewer top-level items",
+      "passed": true,
+      "evidence": "Line 5: '6 main destinations, a short list of starred projects, and a small utility area'. The sketch (lines 20-25) lists Home, My Tasks, Projects, Docs & Files, Reports, Team, and line 39 says 'That leaves 6 permanent destinations, plus 3 utility controls'. Starred projects are a separate, collapsible, user-chosen shortcut list (line 90), not primary destinations."
+    },
+    {
+      "text": "Billing, Settings, Help and What's New are moved out of the primary list into a utility, account or footer area",
+      "passed": true,
+      "evidence": "Sketch lines 32-36 place a bottom utility area below a divider: '? Help & what's new' and '[ Agency name v ] Settings, Integrations, Billing, Your profile, Sign out'. Mapping table lines 120-123: Billing and Settings go to 'Workspace menu', Help and What's New to 'Help & what's new menu | Bottom of the sidebar'."
+    },
+    {
+      "text": "Reports, Analytics and Insights are no longer three separate top-level items",
+      "passed": true,
+      "evidence": "Line 7: 'Reports, Analytics and Insights become Reports.' Table lines 111-113: Analytics goes to 'Reports (charts become report types)', Insights to 'Insight cards on Home, plus the full list in Reports'."
+    },
+    {
+      "text": "Team and People are no longer two separate top-level items",
+      "passed": true,
+      "evidence": "Line 8: 'Team and People become Team.' Table line 118: 'People | Team > Members'. Line 84 explains the choice of 'Team' over 'People'."
+    },
+    {
+      "text": "nav-proposal.md names one specific location for exporting a report",
+      "passed": true,
+      "evidence": "Line 133: 'One Reports item. Everything that produces a chart or a table lives there.' Line 135: 'Every report has a visible Export button in its header, not inside a \"...\" menu.' That names a concrete place (the header of each report in Reports). The run also adds Export CSV on list views (line 136) and a project Reports tab 'with the same Export button' (line 137), and never designates one of these as the canonical home, but the report-header button in Reports is specific enough to pass."
+    },
+    {
+      "text": "nav-proposal.md names one specific location for inviting a teammate",
+      "passed": true,
+      "evidence": "Line 146: 'One Team page, with Invite people as its main button.' Line 78 repeats that 'Invite people' is the main button on the Team page. A permanent sidebar-footer button (line 147) and invite-by-email in assignment (line 148) are added as further entry points; none is labelled canonical, but the Team page button is a specific named location."
+    },
+    {
+      "text": "nav-proposal.md includes tree-test tasks written as user goals, with success targets",
+      "passed": true,
+      "evidence": "Lines 183-191 list eight tasks phrased as goals, for example 'Your client wants last month's project status as a PDF. Where do you go?' and 'A new designer starts Monday. Where do you add them?'. Line 193 sets the target: 'at least 80% success on the export and invite tasks, and no task more than 10 points worse than with the current structure.' The test compares current and proposed trees (line 183). This passes, but thinly: there are no per-task targets and no correct-answer paths for any task."
+    },
+    {
+      "text": "nav-proposal.md does not present invented usage data or test results as fact",
+      "passed": true,
+      "evidence": "Line 155: 'No usage data, screenshots or ticket text came with the request, so this proposal rests on these assumptions.' Line 160 lists traffic as an assumption ('Dashboard, My Tasks and Projects get the most traffic, and Billing, Integrations and What's New get the least'). Line 58 marks the persona as '(assumed, not measured)', lines 131 and 143 mark current export and invite placement '(assumed)', line 163 calls the thresholds 'starting points, not established benchmarks', and line 201 calls the 50% drop 'a suggested target'. No ticket counts, metrics or test results are given. Closest call: line 43 states 'My Tasks, used every hour, gets the same weight as Billing, which one person opens once a month' without a hedge in that sentence, and lines 54 ('Most users rarely open them') and 90 ('An agency PM's most common destination is one particular client project') are also unhedged. They read as illustration and the underlying traffic claim is listed as an assumption, so this passes, but it is less careful than it should be."
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "total": 8,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 171.5,
+    "total_duration_seconds": 171.5
+  },
+  "claims": [
+    {
+      "claim": "Integrations, Billing, Settings, Help and What's New are 5 of the 18 items (28%)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "5/18 = 27.8%, items match the prompt."
+    },
+    {
+      "claim": "Items in the middle of the list are Insights, Files, Docs, Wiki, Team, People",
+      "type": "factual",
+      "verified": true,
+      "evidence": "These are positions 8 to 13 of 18 in the prompt order."
+    },
+    {
+      "claim": "Nothing is removed. Every current page still exists and has a home.",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The mapping table (lines 104-123) has a row for each of the 18 current items."
+    },
+    {
+      "claim": "My Tasks is used every hour and Billing is opened by one person once a month",
+      "type": "factual",
+      "verified": false,
+      "evidence": "No usage data was supplied (the document says so at line 155). This is an unhedged illustrative claim at line 43, not something the run could know."
+    },
+    {
+      "claim": "The button fixes don't depend on the new structure, so they can ship first, within days",
+      "type": "quality",
+      "verified": false,
+      "evidence": "Plausible, but the run has not seen the codebase or product, so 'within days' is unverifiable."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "nav-proposal.md names one specific location for exporting a report",
+        "reason": "This run lists the report header, every list view, a project Reports tab and search as export locations without naming one canonical home, and still passes. If the intended standard is a single canonical home with other paths leading to it, the assertion should say so. The same applies to the invite assertion, where this run offers the Team page, a footer button and invite-by-email with no canonical choice."
+      },
+      {
+        "assertion": "nav-proposal.md includes tree-test tasks written as user goals, with success targets",
+        "reason": "A single blanket bar (80% on two task types, no more than 10 points worse elsewhere) with no correct-answer paths satisfies this. Requiring a correct destination and a numeric target per task would separate this run from the with-skill run."
+      },
+      {
+        "assertion": "nav-proposal.md does not present invented usage data or test results as fact",
+        "reason": "Hard to grade consistently: both runs contain unhedged qualitative frequency claims, and this run has a near-numeric one ('used every hour', 'one person opens once a month'). Say whether illustrative frequency language counts, or narrow the assertion to metrics, ticket counts and test results."
+      }
+    ],
+    "overall": "This baseline run reaches the same six-item structure and passes all eight assertions, which shows the assertion set does not discriminate. The differences that matter (canonical homes, per-task test targets with correct answers, consistent hedging, a redirect table, governance) are not tested."
+  }
+}

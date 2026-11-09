@@ -1,0 +1,116 @@
+{
+  "expectations": [
+    {
+      "text": "Every one of the 34 URLs in current-urls.txt appears in the redirect list with a destination or a 410",
+      "passed": true,
+      "evidence": "Mechanical check (scratch script check_plan.py parsing Table A, migration-plan.md lines 148-183): 34/34 input paths present as the Current URL of a row, none missing. Classification: 17 kept ('same | 200', row 34 '200, noindex'), 17 x 301, of which 15 have a concrete target and 2 have placeholders: row 2 '/?p=112' -> 'the post's new URL, e.g. /insights/<slug>/ (resolve in 7.1)', row 3 '/?page_id=7' -> 'the page's new URL (resolve in 7.1)'. No 410s are used."
+    },
+    {
+      "text": "Moved pages get 301 redirects, and the plan uses no 302 for a permanent move",
+      "passed": true,
+      "evidence": "Every moved row in Table A has Code '301'; every active rule in the 8.1 _redirects file (lines 269-345) ends in 301. Line 138: 'All redirects are permanent (301; a 308 is equally fine for Google)'. The only '302' in the plan (line 475) is the test script flagging 'temporary 302s' as failures; the Vercel note (line 365) uses a permanent 308."
+    },
+    {
+      "text": "Old URLs with an obvious new equivalent are redirected to that equivalent, not to the homepage",
+      "passed": true,
+      "evidence": "No Table A row targets '/'. Row 4 -> '/about-us/', row 5 -> '/about-us/team/', row 13 -> '/services/change-management/', rows 22-24 -> '/insights/<same slug>/', row 29 -> '/insights/reports/', row 30 PDF -> PDF at '/downloads/...' (line 185: 'The PDF redirects to the PDF, not to its new landing page'). Only B10 '/index.php' goes to '/', which is the home page's own alias. Line 207: 'Sending junk to the homepage is treated by Google as a \"soft 404\"'. Archives with no page equivalent (row 27 tag, row 28 author) go to '/insights/', the nearest section, not home."
+    },
+    {
+      "text": "The plan states URL rules covering lowercase, hyphens, no .html or .php extensions, and one trailing-slash form",
+      "passed": true,
+      "evidence": "Section 4, rule 2 (line 113): 'Lowercase letters, digits and hyphens only. No underscores, capitals, spaces or file extensions on page URLs.' Rule 3 (line 114): 'Page URLs end in a slash (/services/). Files keep their extension and have no slash'. Assumption 4 (line 25) and 8.2/8.3 ('trailingSlash: true', 'trailingSlash: \"always\"') enforce the one form."
+    },
+    {
+      "text": "The proposed sitemap labels each page or URL pattern with a template type, or the plan includes a content model",
+      "passed": false,
+      "evidence": "The sitemap (lines 52-87) is a folder tree with free-text notes on some nodes ('Services overview', 'new hub page', 'new address (was change-management.php)', 'noindex, not in the sitemap'); most nodes (strategy-consulting/, operations/, healthcare/, manufacturing/, both case studies, careers/, contact-us/, privacy-policy/) carry no label, and none is a template type. There is no content model: a grep for 'template', 'content model', 'content type' and 'front matter' finds nothing. The nearest thing, the 'Where new content goes' table (lines 124-132), maps seven content kinds to URL patterns with no fields or relations and does not cover home, hubs, listings or utility pages."
+    },
+    {
+      "text": "The plan handles the ?p=112 and ?page_id=7 URLs explicitly, with a stated way to resolve them",
+      "passed": true,
+      "evidence": "Table A rows 2-3; section 7.1 (lines 216-228): 'Open https://www.northgateadvisory.com/?p=112 and ... ?page_id=7 in a browser. WordPress redirects each one to the item's real address, so note where they land', a read-only fallback query 'SELECT ID, post_type, post_status, post_name, post_parent FROM wp_posts WHERE ID IN (7, 112);', and what to do if an ID is a draft or deleted. The _redirects file holds the commented rules (lines 272-273), line 350 flags that Netlify's fixed-value query matching must be confirmed, and 8.2 gives Cloudflare, Vercel, Apache and nginx syntax for them."
+    },
+    {
+      "text": "The plan handles the PDF under wp-content/uploads explicitly",
+      "passed": true,
+      "evidence": "Row 30 (line 179): '/wp-content/uploads/2022/03/Operations-Benchmark-Report.pdf | /downloads/operations-benchmark-report-2022.pdf | 301 | The same file at a new address; reports collect backlinks'; implemented at file line 341. Line 185 explains PDF to PDF and keeping it ungated; the sitemap adds a landing page at '/insights/reports/operations-benchmark-report/'; B11 and section 6 (line 210) cover other uploads; section 12 offers leaving the PDF at its old path."
+    },
+    {
+      "text": "No redirect target in the list is itself the source of another redirect",
+      "passed": true,
+      "evidence": "Mechanical check: 13 distinct concrete targets from Table A and the 8.1 file ('/', '/about-us/', '/about-us/team/', '/downloads/operations-benchmark-report-2022.pdf', '/insights/', '/insights/<slug>/', '/insights/feed.xml', the three '/insights/<post>/' URLs, '/insights/reports/', '/services/change-management/', '/sitemap.xml') were checked against the 17 Table A redirect sources and run through all 52 active rules with Netlify-style first-match (splats, placeholders, trailing slash normalized, case-sensitive and case-insensitive). Result: no chains. '/' is a target (from '/index.php') but the only rules with source '/' are commented out and conditioned on p=112 or page_id=7, so plain '/' is never redirected. The parametrised '/insights/:slug/' targets are matched by no rule."
+    },
+    {
+      "text": "The plan says how to test the redirects before launch, such as crawling the old URLs and checking status codes",
+      "passed": true,
+      "evidence": "Section 9 (lines 396-540): a 'redirect-tests.txt' listing every kept URL (expect 200), every new page, every Table A redirect with its expected target and safety-net cases (including '/2018/01/01/why-strategic-plans-fail/' to prove the pattern rule), plus 'check-redirects.sh' that checks for 301/308, the exact one-hop target and a final 200. Line 535: 'Run it against the staging or preview address before launch'; the launch checklist (line 562) requires 'The redirect test passes 100%'. Section 7.2 adds a Screaming Frog crawl as the content-parity baseline."
+    },
+    {
+      "text": "Any shippable redirect file in migration-plan.md implements every redirected row of its mapping table, or marks each missing row as pending with a reason",
+      "passed": true,
+      "evidence": "Mechanical check simulating each Table A row through the 8.1 _redirects file (lines 269-345) with Netlify first-match semantics: all 15 active redirected rows resolve to the table's target with 301. 4 via exact lines (rows 4, 5, 13, 30); 6 via source lines written without the trailing slash (rows 19 '/blog', 22-24 posts, 26 '/category/insights', 29 '/resources/whitepapers'), which match because Netlify normalizes trailing slashes before matching; 5 via wildcards with the same target (rows 20-21 '/blog/page/*', 25 '/category/*', 27 '/tag/*', 28 '/author/*'). Rows 2-3 are commented lines 272-273 under '# 1. WordPress ID links. Uncomment each line once section 7.1 gives its target.' No kept URL is caught by a rule. Caveat: the plan never states the slash normalization it relies on, and it says the same file 'works' on Cloudflare Pages (line 357); on a host that matches paths exactly, '/blog/' would fall through every rule (no '/blog/*' line) and go unredirected."
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 1,
+    "total": 10,
+    "pass_rate": 0.9
+  },
+  "timing": {
+    "executor_duration_seconds": 699.1,
+    "total_duration_seconds": 699.1
+  },
+  "claims": [
+    {
+      "claim": "Of the 34 URLs, 17 keep their exact address and 17 get a permanent (301) redirect",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Script classification of Table A: keep 17, 301 17."
+    },
+    {
+      "claim": "The redirect rules include pattern rules that catch every dated post URL",
+      "type": "factual",
+      "verified": false,
+      "evidence": "The Netlify file's patterns cover only the years 2015 to 2026 (lines 295-318); a post dated 2014 or earlier would not be caught. The file comment says 'Trim or extend to the years you actually published in', but the summary claim (line 9) is unqualified. The Apache and nginx versions use (19|20)\\d\\d and do cover all years."
+    },
+    {
+      "claim": "I tested it [check-redirects.sh] against a local mock server: it passes correct redirects, and it flags missing pages, redirect chains, wrong targets, temporary 302s and missing rules",
+      "type": "process",
+      "verified": false,
+      "evidence": "No transcript or test artifact is in the run directory, so the claim cannot be verified. Reading the script, the logic does treat non-301/308 codes, wrong Location targets and a non-200 final page as failures."
+    },
+    {
+      "claim": "The /2018/01/01/why-strategic-plans-fail/ test line can only pass through the pattern rule",
+      "type": "factual",
+      "verified": true,
+      "evidence": "No exact rule has a 2018 path; it can only match '/2018/:month/:day/:slug /insights/:slug/ 301' (line 301)."
+    },
+    {
+      "claim": "Cloudflare Pages can't match query strings in _redirects, doesn't support '!', and allows 2,000 static and 100 dynamic rules",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Consistent with Cloudflare Pages' documented _redirects limits as known to the grader; not fetched live during grading."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Any shippable redirect file in migration-plan.md implements every redirected row of its mapping table, or marks each missing row as pending with a reason",
+        "reason": "This run passes only because Netlify strips trailing slashes before matching: six source lines are written without the slash the old URLs have. The plan never states that dependency and says the same file works on Cloudflare Pages. Consider requiring source paths to match the old URLs exactly, or the plan to state the host's matching rules."
+      },
+      {
+        "reason": "No assertion covers the biggest risk in this input: /blog/page/3/ implies 18 or more posts missing from the list. Both runs caught it, but it would discriminate against weaker outputs."
+      },
+      {
+        "reason": "No assertion checks how URLs with no equivalent are handled. This run redirects every tag and author archive to /insights/; the with-skill run retires author archives with 410. That is a real quality difference the evals do not see."
+      }
+    ],
+    "overall": "Only assertion 5 (template types or content model) separated the runs. This run's strengths, a runnable redirect test list plus checker script and syntax for five hosts, are not measured by any assertion."
+  }
+}

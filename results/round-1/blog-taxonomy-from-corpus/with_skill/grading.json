@@ -1,0 +1,121 @@
+{
+  "expectations": [
+    {
+      "text": "ia-proposal.md assigns every one of the 24 posts to a category, with no post missing or left unassigned",
+      "passed": false,
+      "evidence": "Mechanical check with check_assign.py (lists the 24 slugs from posts/*.md filenames, reads each post's front-matter title, finds the row for that title in every markdown table with Post and Category columns, and checks the Category cell is one of the proposal's own defined categories): RESULT 23/24 posts assigned to a valid category. The one failure is 2025-08-15-workshop-pricing-for-freelancers, whose row at line 154 reads 'How to price a workshop as a freelance facilitator | None: unlisted (5.5)'. Line 157 confirms 'Totals: Plan 7, Warm up and wrap up 4, Brainstorm, discuss and decide 7, Handle tricky moments 5, unlisted 1.' Section 5.5 (line 177) recommends leaving it out of every category; the fallback category is offered only conditionally ('If you'd rather keep it browsable now, the least-bad fit is Plan a meeting or offsite', line 179), so the post is left unassigned."
+    },
+    {
+      "text": "ia-proposal.md presents at least two alternative ways to organize the posts before recommending one",
+      "passed": true,
+      "evidence": "Section 4 'The options' (line 50) opens 'I drafted three schemes and applied each to all 24 posts before choosing.' It lays out A (by task), B (by kind of session) and C (by format), plus a fourth 'by what the group needs to do', each with Serves / Applied / Costs or Verdict, and applies each to the corpus (e.g. line 62: B would need an 'Any meeting' category 'holding 39% of posts'; line 67: C's Guides 'holds 10 of 24 (42%)'). Only then, at line 72: 'Recommendation: A for categories, B for tags, C as a badge.' The opening summary states the conclusion, but the body weighs the options before recommending."
+    },
+    {
+      "text": "ia-proposal.md merges tips, Tips and \"facilitation tips\" into one term (or retires all three) rather than keeping two or more of them",
+      "passed": true,
+      "evidence": "Migration table retires all three: line 266 'facilitation tips | 4 | vague advice label | removed', line 270 'tips | 2 | vague advice label | removed', line 271 'Tips | 2 | case duplicate of tips | removed', each 301 to /start-here/. None survives in the controlled lists of 5.2, and line 91 says lowercase slugs prevent 'another Tips/tips split'."
+    },
+    {
+      "text": "ia-proposal.md retires the misc tag, and its recommended scheme has no misc, other or uncategorized category",
+      "passed": true,
+      "evidence": "Line 263: 'misc | 4 | nothing | removed; its posts went to three categories and the unlisted post | 410'. The recommended categories (5.1, lines 80-85) are Plan a meeting or offsite, Warm up and wrap up, Brainstorm discuss and decide, Handle tricky moments; none is misc, other or uncategorized, and option B was rejected partly because its 'Any meeting' bucket is 'an \"Other\" bucket by another name' (line 62). Caveat: the pricing post ends up with no category ('unlisted'), which is a de facto uncategorized state but not a named category; that defect is counted under the first assertion."
+    },
+    {
+      "text": "ia-proposal.md does not present user research results (card sort percentages, tree test scores, participant quotes) as if they had been collected",
+      "passed": true,
+      "evidence": "Section 9 begins 'These are research designs, not results. Nothing below has been run.' (line 330). The percentages in the tree-test table (80%, 70%) are labelled 'Target'. Line 318 states 'No analytics, site-search logs or reader questions were available', and the self-check (line 365) says 'no invented results'. The quoted phrases in the summary (line 9, \"I need an offsite agenda\") are illustrative, not attributed to participants. Every other percentage (29%, 17%, 46%, 39%, 42%) is computed from the corpus, and I re-verified those counts."
+    },
+    {
+      "text": "ia-proposal.md includes a way to test the scheme with readers, such as a card sort or a tree test with tasks",
+      "passed": true,
+      "evidence": "Section 9 (lines 328-350) gives an optional hybrid card sort ('Recruit 10 to 15 readers who say they are team leads... Give them the 23 on-audience titles and the four category labels') and a tree test with 20 to 30 team leads and 11 tasks written in reader language with correct answers and success targets (80% for top tasks, 70% for borderline ones), plus rules for acting on failures."
+    },
+    {
+      "text": "ia-proposal.md gives a rule or an owner for adding new tags in future, such as checking for a near-duplicate before creating one",
+      "passed": true,
+      "evidence": "Section 7 'Governance and growth': line 294 'Owner: you. Every new term goes through you.' Line 295: 'Adding a term: check the synonym lists in 5.2 first. A new term needs at least three posts... and a definition that doesn't overlap an existing one. While publishing, never create a term'. Line 245 adds a build check that fails on any value not in taxonomy.yml, and line 300 audits 'near-duplicate candidate words' quarterly."
+    },
+    {
+      "text": "ia-proposal.md keeps categories and tags separate: each post gets one primary category, and tags are a separate dimension",
+      "passed": true,
+      "evidence": "5.1 heading 'Categories: exactly one per post' (line 76); tags are separate controlled lists by dimension in 5.2 (Session, Setting) with format as a badge; the content model (lines 233-243) gives separate fields 'category: ... required, exactly one', 'format', 'session', 'setting'. No category name is reused as a tag. The table in 5.3 gives every assigned post a single category and puts session/remote in separate columns. The one exception is the unlisted pricing post, which gets no category; that is counted under the first assertion, not this one, because it does not blur categories and tags."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 1,
+    "total": 8,
+    "pass_rate": 0.88
+  },
+  "timing": {
+    "executor_duration_seconds": 685.8,
+    "total_duration_seconds": 685.8
+  },
+  "claims": [
+    {
+      "claim": "51 tag uses across 26 distinct tags; 12 of the 26 (46%) are used once",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Recounted from posts/*.md front matter: 51 uses, 26 distinct, 12 single-use."
+    },
+    {
+      "claim": "tips (2), Tips (2) and facilitation tips (4) sit on 7 posts, and the dominant-voices post carries two of them; under the new scheme those 7 land in all four categories",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Counts match the front matter; the seven posts map to Tricky moments (3), Brainstorm/discuss/decide (2), Plan (1), Warm up (1) in the 5.3 table."
+    },
+    {
+      "claim": "Category totals Plan 7, Warm up 4, Brainstorm/discuss/decide 7, Tricky moments 5, unlisted 1; Guides format holds 10 of 24",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Matches the script output and a count of the Format column in 5.3."
+    },
+    {
+      "claim": "Migration: '5 kept, 20 redirected and 1 gone'",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Migration table has 5 keep rows (meetings, agendas, remote, offsites, retros), 1 x 410 (misc) and 20 x 301 rows."
+    },
+    {
+      "claim": "Borderline placements: 'Each one is covered by a tree-test task (section 9)'",
+      "type": "factual",
+      "verified": false,
+      "evidence": "5.4 lists 7 borderline posts; the tree test's tasks 6-11 cover six of them. 'The parking lot' (line 169) has no task anywhere in section 9."
+    },
+    {
+      "claim": "Governance baseline after migration: '0 posts without a category' (line 297); self-check 'One category per post' (line 362)",
+      "type": "factual",
+      "verified": false,
+      "evidence": "Contradicts the proposal's own 5.3 table, where the pricing post's category is 'None: unlisted', and 7+4+7+5 = 23 of 24. The front-matter model also marks category 'required, exactly one' (line 237) and section 6 says to confirm 'every post has exactly one category', which the pricing post would fail."
+    },
+    {
+      "claim": "Self-check rubric average 3.7, nothing below 3",
+      "type": "quality",
+      "verified": true,
+      "evidence": "The twelve scores (3,3,4,4,3,4,4,4,3,4,4,4) average 3.67. The self-scores are the author's own and not independently verified; the 'Homes and paths' and 'Migration' scores overlook the unassigned pricing post."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "ia-proposal.md presents at least two alternative ways to organize the posts before recommending one",
+        "reason": "\"before recommending one\" is ambiguous for summary-first documents: both runs state their recommendation in the opening summary. I graded on the body order (options laid out and weighed, then the recommendation) and on whether the alternatives were worked against the posts. Rewording to \"lays out at least two alternative schemes, tests each against the posts, and says why the recommended one beats them\" would make the verdict mechanical rather than a judgment call."
+      },
+      {
+        "assertion": "ia-proposal.md includes a way to test the scheme with readers, such as a card sort or a tree test with tasks",
+        "reason": "One sentence satisfies it: the baseline passed with a single line inside its Assumptions section (five team leads, six tasks, one of them written out, no success threshold). Requiring at least five tasks written in the reader's words plus a pass criterion would separate a real validation plan from a mention."
+      },
+      {
+        "assertion": "ia-proposal.md assigns every one of the 24 posts to a category, with no post missing or left unassigned",
+        "reason": "The with-skill run failed this by a deliberate, argued choice (unlisting the off-audience freelance pricing post rather than forcing it into a category). The assertion is consistent with the user's request (\"tell me which category each post goes in\"), so keep it, but decide explicitly whether an argued 'unlisted' disposition should count; as written it does not."
+      },
+      {
+        "reason": "No assertion checks internal consistency. The with-skill run's own governance baseline says \"0 posts without a category\" and its front-matter model makes category \"required, exactly one\", while its assignment table leaves the pricing post with no category; it also says every borderline placement has a tree-test task, but the parking lot post has none. An assertion such as 'the proposal's counts and rules agree with its own post-by-post table' would catch this."
+      },
+      {
+        "reason": "Assertions 3, 4, 5, 7 and 8 passed for both runs, so they do not discriminate between the skill and the baseline on this case. The real differences (worked alternatives, validation depth, URL/migration detail) are only partly covered."
+      }
+    ],
+    "overall": "No transcript or metrics.json was available for either run, so grading is based on the deliverable alone, with timing from timing.json. The assignment check is mechanical and solid; assertions 2 and 6 need tighter wording to be discriminating, and nothing checks the proposal against itself."
+  }
+}

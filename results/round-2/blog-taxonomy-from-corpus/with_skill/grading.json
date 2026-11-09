@@ -1,0 +1,122 @@
+{
+  "expectations": [
+    {
+      "text": "ia-proposal.md assigns every one of the 24 posts to a category, with no post missing or left unassigned",
+      "passed": true,
+      "evidence": "Script (scratchpad grade/check.py) listed the 24 slugs from posts/ filenames, mapped each table title to its slug via front matter, and counted categories. Result: Appendix A table (lines 255-280) has 24 rows, 'missing: []', 'assigned to undefined category: {}'; every category is one of the five defined in section 4.1 (lines 62-68). Appendix B CSV also covers all 24 files with zero differences from Appendix A. The misfit freelance post (#23) sits in the defined primary category 'Plan offsites & workshops' (line 133: 'that is where Appendix A puts it')."
+    },
+    {
+      "text": "ia-proposal.md presents at least two alternative ways to organize the posts before recommending one",
+      "passed": true,
+      "evidence": "Section 3 'Three ways to organize it' (lines 41-54) lays out A by reader's job, B by format and C by occasion, each applied to all 24 posts with per-category counts, largest share, misfits, two-home posts, who it serves and where it strains, then 'Why A.' (line 54). The detailed scheme only starts at section 4 (line 56). Section 1 (line 7) names the five categories in a two-sentence opening summary, which the grading rule allows."
+    },
+    {
+      "text": "ia-proposal.md merges tips, Tips and \"facilitation tips\" into one term (or retires all three) rather than keeping two or more of them",
+      "passed": true,
+      "evidence": "Line 112: '`tips`, `Tips`, `facilitation tips` and `misc` vanish completely: their posts are placed by the rule above and given a Format'. Appendix C (lines 321, 332-333) sends all three old tag pages to 410; none survives as a term (Format values are Agenda/Activity/Guide)."
+    },
+    {
+      "text": "ia-proposal.md retires the misc tag, and its recommended scheme has no misc, other or uncategorized category",
+      "passed": true,
+      "evidence": "Line 112 retires misc; Appendix C line 323 redirects /tags/misc/ to /category/team-meetings/. The five categories (lines 64-68) are Run team meetings, Plan offsites & workshops, Open, energize & close, Brainstorm & decide, Handle tricky dynamics: no misc/other/uncategorized bucket. The one misfit is given a real category, not a catch-all (line 133)."
+    },
+    {
+      "text": "ia-proposal.md does not present user research results (card sort percentages, tree test scores, participant quotes) as if they had been collected",
+      "passed": true,
+      "evidence": "The only percentages tied to readers are tree-test targets in a 'Target' column (line 224), framed as future thresholds: 'Decide now what each result will mean' (line 241). Line 212: 'I had no analytics, search logs or reader questions... I haven't stated how often anything is read, because I don't know.' 17%, 29% and 42% are corpus counts. Reader phrases on line 9 are illustrative. Minor blemish: line 94 asserts 'give me an agenda for my offsite' is 'a request team leads make in exactly those words' with no source, an unsupported claim but not presented as collected study data."
+    },
+    {
+      "text": "ia-proposal.md includes a way to test the scheme with readers, such as a card sort or a tree test with tasks",
+      "passed": true,
+      "evidence": "Section 8 'How to validate it before you build' (lines 220-249): a text-only tree test, 20-50 recruits who run their own team's meetings (newsletter as pool), 12 tasks written in team-lead words that avoid the labels, each with correct answer, target success rate and what it checks, a directness target, and pre-committed actions per result (e.g. 'Task 8: if most first clicks go to Handle tricky dynamics, move the fishbowl post there')."
+    },
+    {
+      "text": "ia-proposal.md gives a rule or an owner for adding new tags in future, such as checking for a near-duplicate before creating one",
+      "passed": true,
+      "evidence": "Section 6, line 198: 'Owner: you. No term is added without your say.' Line 200: 'Adding a term. Check the synonym lists first; most \"new\" terms are an existing one. A new category needs 3 posts the placement rule can't place.' Line 110: a topic tag needs at least 3 posts across 2 categories and an excluding definition. Line 199: build check fails on any off-list value."
+    },
+    {
+      "text": "ia-proposal.md keeps categories and tags separate: each post gets one primary category, and tags are a separate dimension",
+      "passed": true,
+      "evidence": "Line 7: 'Give every post exactly one of five categories'; line 70: 'Total: 24 posts, each in exactly one category.' Tags are replaced by separate closed fields (section 4.3, titled 'Tags: two closed fields instead of free tags'): Format, exactly one per post, and Setting, zero or one. Front matter keeps `category` apart from `format`/`setting` (lines 169-178). The fields cut across categories: Activity and Guide each appear in several categories, and Remote & hybrid covers posts 2, 9 and 16 in three different categories. Note line 100: 'No topic tags for now.'"
+    },
+    {
+      "text": "The category totals and the rules stated in ia-proposal.md match its own post-by-post assignment table, with no contradiction",
+      "passed": true,
+      "evidence": "Script: counts from Appendix A are Run team meetings 5, Plan offsites & workshops 7, Open, energize & close 4, Brainstorm & decide 5, Handle tricky dynamics 3 (sum 24). They MATCH all four stated totals: section 3 scheme A (line 47), section 4.1 table, section 4.4 site tree and the Appendix A totals line (253). Format counts Agenda 4 / Activity 10 / Guide 10 and Remote & hybrid 3 match lines 90-92, 98 and 253. Appendix B CSV equals Appendix A on every row. Appendix C has 26 rows, 21x301 and 5x410, matching line 347. Every destination obeys the stated rule 'smallest new page that lists most of its posts; with no majority, 410' (0 mismatches). By hand, rule 4.2 reproduces each row. The freelance post is openly flagged as fitting nowhere and given a least-bad home (lines 49, 133), and the five close calls (lines 140-144) match the table. Small wording tension only: line 112 says misc posts 'are placed by the rule above', while #23 is placed by judgement as line 133 explains."
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 0,
+    "total": 9,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 764.5,
+    "total_duration_seconds": 764.5
+  },
+  "claims": [
+    {
+      "claim": "26 free-form tags, 51 tag uses on 24 posts, 12 used once",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Script: 26 distinct tags, 51 uses, 12 singletons."
+    },
+    {
+      "claim": "'Tips' in three spellings on 7 posts, 8 uses",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Posts 3, 12 (tips), 4, 15 (Tips), 6, 11, 15, 17 (facilitation tips): 7 posts, 8 uses."
+    },
+    {
+      "claim": "misc on 4 posts (17%), 3 of those 4 about team meetings",
+      "type": "factual",
+      "verified": true,
+      "evidence": "misc on posts 1, 9, 21, 23; 1, 9 and 21 are filed in Run team meetings."
+    },
+    {
+      "claim": "Each post is a title plus a single short paragraph (12 to 23 words)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Body word counts range from 12 to 23."
+    },
+    {
+      "claim": "Five posts say 'facilitator' or 'facilitation' in the title or body",
+      "type": "factual",
+      "verified": true,
+      "evidence": "grep: facilitating-conflict, first-workshop-checklist, remote-whiteboard-tools, psychological-safety-starter, workshop-pricing-for-freelancers."
+    },
+    {
+      "claim": "I applied each scheme to all 24 posts before choosing",
+      "type": "process",
+      "verified": false,
+      "evidence": "Scheme B and C counts each sum to 24 (4+3+7+10; 6+10+3+2+2+1), but no per-post placement for B or C is shown and there is no transcript, so the process can't be confirmed."
+    },
+    {
+      "claim": "'give me an agenda for my offsite' is a request team leads make in exactly those words (line 94)",
+      "type": "quality",
+      "verified": false,
+      "evidence": "No source given; line 212 says there were no analytics, search logs or reader questions."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "ia-proposal.md assigns every one of the 24 posts to a category, with no post missing or left unassigned",
+        "reason": "The pass/fail line for a hidden one-post category ('For facilitators (unlisted)', defined with a slug but in neither nav nor footer) is ambiguous. State whether a defined but navigation-hidden category counts as assigned."
+      },
+      {
+        "assertion": "ia-proposal.md keeps categories and tags separate: each post gets one primary category, and tags are a separate dimension",
+        "reason": "With_skill passes while proposing no topic tags at all, only Format and a single Setting value. If the user's request for 'a set of categories and tags' should yield a usable cross-cutting tag set, add an assertion for that; as written, any separate field satisfies it."
+      },
+      {
+        "reason": "Neither run is checked on whether its own placement rule reproduces its table post by post; that is where the only real inconsistency surfaced here. Consider making the rule check explicit in assertion 9, or adding a separate assertion."
+      },
+      {
+        "reason": "No assertion checks unsupported claims about reader behaviour (e.g. 'the most common thing a non-specialist goes looking for'). Assertion 5 only catches fabricated study results."
+      }
+    ],
+    "overall": "The assertions discriminate well on alternatives and on testing with readers. Assertions 3, 4 and 7 were easy for both runs."
+  }
+}

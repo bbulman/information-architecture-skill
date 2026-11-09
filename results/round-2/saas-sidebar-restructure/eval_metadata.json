@@ -1,0 +1,16 @@
+{
+  "eval_name": "saas-sidebar-restructure",
+  "prompt": "Our project management app has 18 items in the left sidebar, in this order: Dashboard, My Tasks, Projects, Timeline, Calendar, Reports, Analytics, Insights, Files, Docs, Wiki, Team, People, Integrations, Billing, Settings, Help, What's New. Support tickets keep coming in from people who can't find where to export a report or where to invite a teammate. Our users are mostly project managers at agencies with 10 to 50 staff. Propose a better structure for the sidebar and write it up in nav-proposal.md.",
+  "assertions": [
+    "The proposed primary sidebar has seven or fewer top-level items",
+    "Billing, Settings, Help and What's New are moved out of the primary list into a utility, account or footer area",
+    "Reports, Analytics and Insights are no longer three separate top-level items",
+    "Team and People are no longer two separate top-level items",
+    "nav-proposal.md names one specific location for exporting a report",
+    "nav-proposal.md names one specific location for inviting a teammate",
+    "nav-proposal.md includes tree-test tasks written as user goals, with success targets",
+    "nav-proposal.md does not present invented usage data or test results as fact",
+    "nav-proposal.md names one canonical home for exporting a report and one for inviting a teammate, and says any other entry points lead to those homes",
+    "Every tree-test task in nav-proposal.md has a stated correct answer and a numeric success target"
+  ]
+}

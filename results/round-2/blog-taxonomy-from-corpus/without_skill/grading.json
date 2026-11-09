@@ -1,0 +1,116 @@
+{
+  "expectations": [
+    {
+      "text": "ia-proposal.md assigns every one of the 24 posts to a category, with no post missing or left unassigned",
+      "passed": true,
+      "evidence": "Script (scratchpad grade/check.py) listed the 24 slugs from posts/ filenames, mapped each table title to its slug via front matter, and counted categories. Result: section 6 table (lines 117-142) has 24 rows, 'missing: []', 'assigned to undefined category: {}'. Borderline, flagged for the reviewer: post #23's cell reads '*For facilitators* (unlisted)' (line 141). 'For facilitators' is a category the proposal defines: row 6 of the section 3 table with slug `for-facilitators`, a description and a count (line 63), plus line 14 'For facilitators (1 post, unlisted)'. So '(unlisted)' describes the category's navigation visibility ('Not in the main nav'), not a missing assignment. It is not in the nav or the footer (section 7), only reachable by search and old links (line 182). If the intent is that a hidden category counts as 'unlisted', this flips to FAIL."
+    },
+    {
+      "text": "ia-proposal.md presents at least two alternative ways to organize the posts before recommending one",
+      "passed": false,
+      "evidence": "No alternative organizing scheme is presented. The document opens with the chosen categories (lines 3-18). Section 3's 'Why this split' (lines 65-71) justifies only that scheme. The only A/B options (section 8, lines 180-185) concern where the single freelance post goes. The only rejected alternative is one sentence after the assignment table (line 150: 'A general \"Activities\" or \"Exercises\" bucket would only help readers who already know the technique's name'). A grep for alternative/option/scheme/approach found no comparison of schemes."
+    },
+    {
+      "text": "ia-proposal.md merges tips, Tips and \"facilitation tips\" into one term (or retires all three) rather than keeping two or more of them",
+      "passed": true,
+      "evidence": "Line 18: '`misc`, `tips`, `Tips` and `facilitation tips` are all retired. None of them told a reader anything.' Section 10 (lines 210-212): tips, Tips and facilitation tips all 'Removed (fits every post)'."
+    },
+    {
+      "text": "ia-proposal.md retires the misc tag, and its recommended scheme has no misc, other or uncategorized category",
+      "passed": true,
+      "evidence": "Line 18 retires misc; line 209: 'misc | 4 | Removed; each post filed properly'. Categories (lines 9-14) contain no misc/other/uncategorized. The one-post 'For facilitators' category has a defined scope ('Running facilitation as a job: pricing, clients, engagements', line 63), and line 185 warns against a catch-all: 'That's how `misc` happened.'"
+    },
+    {
+      "text": "ia-proposal.md does not present user research results (card sort percentages, tree test scores, participant quotes) as if they had been collected",
+      "passed": true,
+      "evidence": "No card sort, tree test or survey results, percentages or participant quotes. A grep for card sort, tree test, survey, interview, participant, usability and % found only line 26's illustrative 'They're thinking \"I've got a 40-person all-hands\"'. Several reader-behaviour claims are stated as fact with no source: line 68 'the most common thing a non-specialist goes looking for by name', line 69 'one of the most common team-lead problems', line 172 'the two tags readers are most likely to browse on their own'. They are not dressed as collected research, so this passes."
+    },
+    {
+      "text": "ia-proposal.md includes a way to test the scheme with readers, such as a card sort or a tree test with tasks",
+      "passed": false,
+      "evidence": "No way to test the scheme with readers. A grep for card sort, tree test, first-click, survey, interview, participant, usability and validate returned no matches. Section 12 'Things to watch' (lines 267-271) covers category-size thresholds and an owner review twice a year, not testing with readers."
+    },
+    {
+      "text": "ia-proposal.md gives a rule or an owner for adding new tags in future, such as checking for a near-duplicate before creating one",
+      "passed": true,
+      "evidence": "Section 5 tag rules (lines 104-111): 'A tag needs two posts before it's created. ... Candidates are parked in section 9 until a second post arrives.' 'Only tags from this list. A new tag is a decision you make on purpose.' Line 261: have the build fail on any tag not in the taxonomy file. Line 271: twice-yearly review that promotes candidate tags."
+    },
+    {
+      "text": "ia-proposal.md keeps categories and tags separate: each post gets one primary category, and tags are a separate dimension",
+      "passed": true,
+      "evidence": "Line 5: 'Every post gets one category saying where it lives, plus up to three tags that cut across categories.' Line 33: 'Each post has exactly one category.' Line 106: 'A tag never repeats a category's name.' Script: at most 3 tags per post and every tag on 2 or more posts. Tags span categories, e.g. `everyone-heard` is on posts in Ideas & decisions (4, 12), Team meetings (9) and Tricky situations (15, 22)."
+    },
+    {
+      "text": "The category totals and the rules stated in ia-proposal.md match its own post-by-post assignment table, with no contradiction",
+      "passed": false,
+      "evidence": "The totals all MATCH. Script counts from the section 6 table are Team meetings 5, Workshops & offsites 8, Icebreakers & energizers 3, Ideas & decisions 4, Tricky situations 3, For facilitators 1 (sum 24). They agree with the short version (lines 9-14), the section 3 table, the 'Posts by category' line 144 and section 12. The 8 tag counts match section 5, and all 26 old-tag counts match section 10. But a stated rule contradicts the table. Section 4 (lines 77-83): 'Work down this list and stop at the first yes ... 5. Otherwise, it's about your recurring team meetings. File it in Team meetings.' No branch leads to 'For facilitators'. Applied to 'How to price a workshop as a freelance facilitator', the rule files it in Team meetings, yet the table (line 141) puts it in For facilitators, and section 4 never notes the exception. Arguably also: question 1 sends 'a format meant for a big group' to Workshops & offsites at the first yes. The doc tags Silent brainstorming (#12) `meeting-formats` + `large-groups`, exactly like Fishbowl (#19, filed in Workshops), but files #12 in Ideas & decisions (line 131), overriding the stated order."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 3,
+    "total": 9,
+    "pass_rate": 0.67
+  },
+  "timing": {
+    "executor_duration_seconds": 276.9,
+    "total_duration_seconds": 276.9
+  },
+  "claims": [
+    {
+      "claim": "26 distinct tags for 24 posts; 12 used only once",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Script: 26 distinct, 12 singletons."
+    },
+    {
+      "claim": "tips (2), Tips (2), facilitation tips (4); misc on 4 posts",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Matches corpus counts."
+    },
+    {
+      "claim": "Eight tags, each with at least two posts today",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Script: minimum tag use 2, counts match the section 5 table."
+    },
+    {
+      "claim": "Workshops & offsites holds a third of the blog",
+      "type": "factual",
+      "verified": true,
+      "evidence": "8 of 24."
+    },
+    {
+      "claim": "Icebreakers & energizers is the most common thing a non-specialist goes looking for by name (line 68)",
+      "type": "quality",
+      "verified": false,
+      "evidence": "No data cited; there is no search or analytics input."
+    },
+    {
+      "claim": "The filing rule in section 4 files every post",
+      "type": "quality",
+      "verified": false,
+      "evidence": "It has no route to For facilitators, and its catch-all would file the freelance post in Team meetings."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "ia-proposal.md assigns every one of the 24 posts to a category, with no post missing or left unassigned",
+        "reason": "The pass/fail line for a hidden one-post category ('For facilitators (unlisted)', defined with a slug but in neither nav nor footer) is ambiguous. State whether a defined but navigation-hidden category counts as assigned."
+      },
+      {
+        "assertion": "ia-proposal.md keeps categories and tags separate: each post gets one primary category, and tags are a separate dimension",
+        "reason": "With_skill passes while proposing no topic tags at all, only Format and a single Setting value. If the user's request for 'a set of categories and tags' should yield a usable cross-cutting tag set, add an assertion for that; as written, any separate field satisfies it."
+      },
+      {
+        "reason": "Neither run is checked on whether its own placement rule reproduces its table post by post; that is where the only real inconsistency surfaced here. Consider making the rule check explicit in assertion 9, or adding a separate assertion."
+      },
+      {
+        "reason": "No assertion checks unsupported claims about reader behaviour (e.g. 'the most common thing a non-specialist goes looking for'). Assertion 5 only catches fabricated study results."
+      }
+    ],
+    "overall": "The assertions discriminate well on alternatives and on testing with readers. Assertions 3, 4 and 7 were easy for both runs."
+  }
+}

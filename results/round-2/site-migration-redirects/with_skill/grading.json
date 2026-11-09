@@ -1,0 +1,120 @@
+{
+  "expectations": [
+    {
+      "text": "Every one of the 34 URLs in current-urls.txt appears in the redirect list with a destination or a 410",
+      "passed": true,
+      "evidence": "Mechanical check (scratch script check_plan.py parsing the Appendix A table, migration-plan.md lines 395-430): 34/34 input paths present as the Old URL of a row, none missing. Classification: 15 'Keep' (target same URL), 16 '301' with a concrete target, 2 '301, after lookup' (row 2 '/?p=112' -> 'New URL of post 112', row 3 '/?page_id=7' -> 'New URL of page 7', placeholders resolved by the lookup in section 5.1), 1 '410' (row 28 '/author/admin/'). Line 432: 'Totals: 15 kept, 16 redirected, 2 redirected after lookup, 1 retired: 34.'"
+    },
+    {
+      "text": "Moved pages get 301 redirects, and the plan uses no 302 for a permanent move",
+      "passed": true,
+      "evidence": "Every moved row in Appendix A has Action '301' (or '301, after lookup'); every active rule in Appendix C (lines 462-503) ends in 301 or 410, and the pending ID rules use '301!'. A grep for '302' and '308' finds no match anywhere in the plan. Section 5.4 line 294: 'Permanent 301 redirects from a rules file kept in the repository.'"
+    },
+    {
+      "text": "Old URLs with an obvious new equivalent are redirected to that equivalent, not to the homepage",
+      "passed": true,
+      "evidence": "No Appendix A row targets '/'. Equivalents are kept: row 4 '/about-us.html' -> '/about-us/', row 6 '/about-us/leadership/jane-ortiz/' -> '/about-us/team/jane-ortiz/', row 13 '/services/change-management.php' -> '/services/change-management/', rows 22-24 posts -> '/insights/<same slug>/', row 27 '/tag/strategy/' -> '/insights/topics/strategy/', row 30 PDF -> the same PDF at '/files/operations-benchmark-report-2022.pdf' (line 117 explains PDF to PDF, not to the landing page). The one URL with no equivalent (row 28) gets a 410 rather than the home page, and the 7.2 pass criteria (line 370) include 'nothing redirects to the home page'."
+    },
+    {
+      "text": "The plan states URL rules covering lowercase, hyphens, no .html or .php extensions, and one trailing-slash form",
+      "passed": true,
+      "evidence": "Section 4.3, lines 172-176: 'Trailing slash: yes on every page ... Enforce it (/careers redirects to /careers/)'; 'Case: lowercase kebab-case only' (kebab-case is hyphen-separated); 'Extensions: none on pages; downloads keep theirs (.pdf, .xml).' Rows 4 and 13 cite 'File extension' as the reason for redirecting the .html and .php URLs."
+    },
+    {
+      "text": "The proposed sitemap labels each page or URL pattern with a template type, or the plan includes a content model",
+      "passed": true,
+      "evidence": "Both. The sitemap in 4.1 (lines 88-112) labels every node with a template type: section-hub, service, 'service, sub-level', industry, listing, case-study, 'article or report', topic-listing, feed, page, people-listing, person, 'page with form', 'utility, noindex', legal, download. Section 4.4 (lines 194-206) is a content model table with Template, URL pattern, Fields and Relations for 11 templates, e.g. 'case-study | /case-studies/<slug>/ | title, client description, summary, challenge, approach, results ... | industry (exactly 1), services (1 to 3), people (many)'."
+    },
+    {
+      "text": "The plan handles the ?p=112 and ?page_id=7 URLs explicitly, with a stated way to resolve them",
+      "passed": true,
+      "evidence": "Appendix A rows 2-3 ('301, after lookup'); section 5.1 line 253: 'open each on the current site and note where it lands (or look up IDs 112 and 7 in the WordPress admin), then point the rule at that content's new URL', with the query-string host caveat and the home-page fallback. Appendix C lines 482-485 hold the commented rules '/  p=112 ... 301!' and '/  page_id=7 ... 301!'. Open question 1 (line 338) and cutover step 2 (line 308) repeat it."
+    },
+    {
+      "text": "The plan handles the PDF under wp-content/uploads explicitly",
+      "passed": true,
+      "evidence": "Row 30: '/wp-content/uploads/2022/03/Operations-Benchmark-Report.pdf | 301 | /files/operations-benchmark-report-2022.pdf | Same file at a clean address'; implemented at Appendix C line 477. Line 117 gives the landing page '/insights/operations-benchmark-report/' and why the PDF redirects to the PDF. Section 5.2 line 271 covers other files under /wp-content/uploads/, and open question 5 asks whether the report is gated."
+    },
+    {
+      "text": "No redirect target in the list is itself the source of another redirect",
+      "passed": true,
+      "evidence": "Mechanical check: 14 distinct concrete targets from Appendix A and the Appendix C file ('/about-us/', '/about-us/team/', '/about-us/team/jane-ortiz/', '/about-us/team/sam-reid/', '/files/operations-benchmark-report-2022.pdf', '/insights/', '/insights/feed.xml', '/insights/remote-strategy-sessions/', '/insights/reports/', '/insights/the-5-whys-still-works/', '/insights/topics/strategy/', '/insights/why-strategic-plans-fail/', '/services/change-management/', '/sitemap.xml') were checked against the 19 mapping-table redirect/410 sources and run through all 28 active Appendix C rules with Netlify-style first-match (splats, placeholders, trailing slash normalized, both case-sensitive and case-insensitive). Result: no chains. The parametrised target '/about-us/team/:splat' is not matched by any rule either. Line 432 makes the same claim: 'No target in this table is itself redirected.'"
+    },
+    {
+      "text": "The plan says how to test the redirects before launch, such as crawling the old URLs and checking status codes",
+      "passed": true,
+      "evidence": "Section 7.2 (lines 368-370): 'Feed every old URL (the 34, plus the generated post and tag lines and Appendix B) to a crawler or a short script against staging. Pass means: kept URLs return 200; redirected URLs return 301 and land on a 200 page in one hop; retired URLs return 410 ...; no target is itself redirected; nothing redirects to the home page. Run it again against production on launch day.' Cutover step 6 (line 312) and step 3 (line 309, recording what old URLs return today) back it. No runnable test file or script is supplied, only the procedure."
+    },
+    {
+      "text": "Any shippable redirect file in migration-plan.md implements every redirected row of its mapping table, or marks each missing row as pending with a reason",
+      "passed": true,
+      "evidence": "Mechanical check simulating each Appendix A row through the Appendix C file (lines 458-503): all 17 active redirected rows (16 x 301 plus row 28 as 410) hit an exact line with the same target and status, e.g. row 27 -> line 475 '/tag/strategy/ /insights/topics/strategy/ 301', row 28 -> line 480 '/author/admin/ /gone/ 410'. Rows 2 and 3 are present as commented lines 484-485 under '# Rows 2 and 3: RESOLVE BEFORE CUTOVER (section 5.1), then uncomment.' None of the 15 kept URLs is caught by any rule. Failures: none."
+    }
+  ],
+  "summary": {
+    "passed": 10,
+    "failed": 0,
+    "total": 10,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 652.3,
+    "total_duration_seconds": 652.3
+  },
+  "claims": [
+    {
+      "claim": "15 kept, 16 redirected, 2 redirected after lookup, 1 retired: 34",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Script classification of Appendix A: keep 15, 301 18 (16 plus the 2 lookups), 410 1."
+    },
+    {
+      "claim": "Appendix C implements every row of Appendix A that needs a rule and every rule in Appendix B",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Every Appendix A redirect row matched an exact line; every Appendix B row has a line or a marked generated-lines placeholder (lines 487-503), including '/about-us/leadership/*', '/blog/*', '/category/*', '/tag/*', '/author/*' (410), feeds and old sitemap URLs."
+    },
+    {
+      "claim": "/blog/page/3/ implies at least 21 posts at WordPress's default of 10 per page, so at least 18 posts are missing from the list",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Page 3 starts at post 21 with 10 per page; 3 posts are listed (rows 22-24)."
+    },
+    {
+      "claim": "Hugo aliases and jekyll-redirect-from write HTML pages that redirect in the browser rather than a server 301",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Consistent with how both tools work (meta-refresh stub pages); not checked against live docs during grading."
+    },
+    {
+      "claim": "Netlify-style query-string rules '/  p=112  <target>  301!' will match the ID links",
+      "type": "factual",
+      "verified": false,
+      "evidence": "Netlify documents query matching with placeholders (key=:value); fixed-value matching is not confirmed in the plan, and unlike the without-skill run this plan does not flag it to check. Rules are commented out pending lookup, so no harm at launch, but it should be tested."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "No assertion covers the biggest risk in this input: /blog/page/3/ implies 18 or more posts missing from the list. Both runs caught it and gave a WP-CLI generator, but an assertion requiring the plan to flag the incomplete post inventory and give a way to produce the missing redirects would discriminate against weaker outputs."
+      },
+      {
+        "assertion": "The plan says how to test the redirects before launch, such as crawling the old URLs and checking status codes",
+        "reason": "A prose description of a crawl (this run) and a runnable test list plus checker script (the without-skill run) pass equally. If a runnable check is the expected outcome, say so."
+      },
+      {
+        "reason": "No assertion checks how URLs with no equivalent are handled. This run retires /author/admin/ and other author archives with 410; the other run sends every tag and author archive to /insights/. Whether no-equivalent archives are retired rather than mass-redirected to a hub is a real quality difference the evals do not see."
+      },
+      {
+        "assertion": "Every one of the 34 URLs in current-urls.txt appears in the redirect list with a destination or a 410",
+        "reason": "Rows 2 and 3 pass on a placeholder destination; this overlaps assertion 6 and cannot fail for a plan that lists every row, so it mostly checks completeness of the table, which both runs got trivially."
+      }
+    ],
+    "overall": "Only the template-type/content-model assertion separated the two runs. The redirect mechanics assertions (8, 10) were satisfied by both without near misses; consider assertions on inventory gaps, no-equivalent handling and host matching semantics."
+  }
+}

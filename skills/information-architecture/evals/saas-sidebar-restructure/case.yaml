@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: saas-sidebar-restructure
+expected_outcome: |
+  nav-proposal.md diagnoses the overlaps (Reports, Analytics and Insights; Files, Docs and Wiki; Team and People), moves account and system items out of the primary list, proposes a primary list of seven or fewer items with clear labels, gives exactly one home for exporting a report and for inviting a teammate, and includes a tree test plan with goal-based tasks, without inventing usage data.

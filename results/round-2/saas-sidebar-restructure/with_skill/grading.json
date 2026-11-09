@@ -1,0 +1,131 @@
+{
+  "expectations": [
+    {
+      "text": "The proposed primary sidebar has seven or fewer top-level items",
+      "passed": true,
+      "evidence": "Section 4.4, line 140: 'Primary (6): Home, My Tasks, Projects, Reports, Docs & files, Team.' Line 104: '18 equal links become six primary sections, a search box, a Pinned group that stays hidden until someone uses it, and three utility links.' Search, Pinned and the utility links (+ Invite people, Help, Settings) are classed separately from the primary list."
+    },
+    {
+      "text": "Billing, Settings, Help and What's New are moved out of the primary list into a utility, account or footer area",
+      "passed": true,
+      "evidence": "Line 141: 'Utility: Search at the top; \"+ Invite people\", Help and Settings at the bottom, beside the account avatar.' Appendix A: Billing to 'Settings > Workspace > Billing & plan' ('Moved to utility and renamed'), Settings to 'Settings, at the bottom of the sidebar' ('Moved to utility'), Help to 'Help > Help center' ('Moved to utility'), and What's New to 'Help > What's New, with a dot when unread' ('Moved to utility')."
+    },
+    {
+      "text": "Reports, Analytics and Insights are no longer three separate top-level items",
+      "passed": true,
+      "evidence": "Tree, lines 82-85: one 'Reports' hub with tabs 'Saved reports (was Reports)', 'Charts (was Analytics)' and 'Insights (was Insights)'. Line 104: 'The sidebar shows only the first level; second-level items appear as tabs.' Appendix A rows 6-8 are marked Merged."
+    },
+    {
+      "text": "Team and People are no longer two separate top-level items",
+      "passed": true,
+      "evidence": "Lines 90-92: 'Team hub page button: Invite people; merges Team and People', with tabs Members (was People) and Groups (was Team). Appendix A rows 12-13 are marked Merged."
+    },
+    {
+      "text": "nav-proposal.md names one specific location for exporting a report",
+      "passed": true,
+      "evidence": "Section 4.3, line 125: 'Home: the Export button at the top right of every saved report, chart and insight, with the same label in the same place... Reports is the only section that holds reporting.' Line 127 adds that it is 'a visible button beside Share, never only an item in an overflow menu'."
+    },
+    {
+      "text": "nav-proposal.md names one specific location for inviting a teammate",
+      "passed": true,
+      "evidence": "Section 4.3, line 132: 'Home: the Team page, with Invite people as its main button.' Line 135 specifies the dialog: email addresses, a role, and the seat cost."
+    },
+    {
+      "text": "nav-proposal.md includes tree-test tasks written as user goals, with success targets",
+      "passed": true,
+      "evidence": "The section 7 table (lines 249-262) has 12 tasks written as scenarios in the participants' words that avoid the target labels. Task 1: 'A client wants last month's progress on their project as a PDF they can forward to their boss. Where would you go to get it?' Task 2: 'A freelance designer joins your agency next week to work on a client project. Where would you go to give them access?' Every row has a Success target column."
+    },
+    {
+      "text": "nav-proposal.md does not present invented usage data or test results as fact",
+      "passed": true,
+      "evidence": "Borderline pass. No usage figures, ticket counts or test results are stated as fact. Line 5: 'I have not seen the app, its usage data or the tickets themselves.' Assumption 11 (line 194): 'No usage data was available | If most PMs open Timeline daily, test it as a seventh primary item.' Line 198 names 'no usage data, no ticket text' as the draft's weakest point. Ticket causes are headed 'Likely causes, to confirm against the tickets' (line 40), and every percentage is a target, not a result. The caveat: line 32 says the five admin and support items 'are visited occasionally', and line 24 calls them 'Occasional', with no hedge in the sentence. I judged this a non-specific description of the item type, not invented data, because it gives no frequency figure and the document says three times that no usage data exists. A strict reading of 'usage frequency stated as fact' would fail it."
+    },
+    {
+      "text": "nav-proposal.md names one canonical home for exporting a report and one for inviting a teammate, and says any other entry points lead to those homes",
+      "passed": true,
+      "evidence": "Each task gets one labelled 'Home', and every other route is listed as a subordinate 'Ways in'. Export (lines 125-126): 'Home: the Export button ... Reports is the only section that holds reporting'; 'Ways in: the Reports section; the Reports tab on each project, which shows the same reports filtered to that project, with the same button; and search, where \"export\", \"download\", \"PDF\" and \"CSV\" all lead to Reports.' Line 144 says project tabs are 'each a filtered view of the matching section, so every item keeps one home'. Invite (lines 132-133): 'Home: the Team page'; 'Ways in, all opening the same dialog: the \"+ Invite people\" link ..., the assignee picker ..., the Members link in Settings > Workspace; and the seat count in Billing & plan.' Line 96 says the sidebar link opens 'the same dialog as Team > Invite people', and line 147 says 'Cross-links, never second homes: Settings > Workspace > Members opens Team'."
+    },
+    {
+      "text": "Every tree-test task in nav-proposal.md has a stated correct answer and a numeric success target",
+      "passed": true,
+      "evidence": "All 12 rows in the section 7 table have a 'Correct answers' cell naming nodes in the participant tree (for example task 7 'Settings > Workspace > Integrations', task 9 'Help > What's New', task 12 'My Tasks') and a numeric 'Success target': 80% for tasks 1-2, 70% for tasks 3-11, and 'Close to 100%' for task 12, the control. Two soft spots: task 12's target is approximate rather than a hard threshold, and task 11 includes a conditional answer ('Home, if it shows those warnings today'). Both still state an answer and a number."
+    }
+  ],
+  "summary": {
+    "passed": 10,
+    "failed": 0,
+    "total": 10,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 558.2,
+    "total_duration_seconds": 558.2
+  },
+  "claims": [
+    {
+      "claim": "The 18 items fall into seven clusters",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The cluster table counts (3+2+3+3+2+3+2) sum to 18, and every prompt item appears exactly once."
+    },
+    {
+      "claim": "Reports, Analytics and Insights sit at positions 6 to 8, and Team and People at 12 and 13",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Matches the order given in the prompt."
+    },
+    {
+      "claim": "10 of the 18 items sit in four clusters of near-synonyms",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Views 2 + Reporting 3 + Content 3 + People 2 = 10."
+    },
+    {
+      "claim": "Appendix totals: 2 unchanged, 1 renamed, 2 became views, 8 merged, 5 moved to utility, 18 in all",
+      "type": "factual",
+      "verified": true,
+      "evidence": "2+1+2+8+5 = 18, and the 18 Appendix A rows agree."
+    },
+    {
+      "claim": "The shortest path is 'one or two clicks for every task here' (line 264)",
+      "type": "factual",
+      "verified": false,
+      "evidence": "In the participant tree (lines 238-246), the correct answers for task 7 (Settings > Workspace > Integrations) and task 8 (Settings > Workspace > Billing & plan) are three levels deep, so their shortest path is three clicks."
+    },
+    {
+      "claim": "18 items 'is three times the six a primary navigation should hold'",
+      "type": "quality",
+      "verified": false,
+      "evidence": "A rule of thumb stated as a fixed standard. Nothing in the document supports six as a limit, though it does not affect the proposal."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "nav-proposal.md names one specific location for exporting a report / nav-proposal.md names one specific location for inviting a teammate",
+        "reason": "These pass for any run that names a concrete location, including the without-skill run, which lists five parallel places to invite someone. The canonical-home assertion carries the real test, so these two add no discrimination. Drop them or reword to 'names exactly one location and treats the others as routes to it'."
+      },
+      {
+        "assertion": "nav-proposal.md does not present invented usage data or test results as fact",
+        "reason": "State whether a vague qualitative frequency word counts. The with-skill run says the five admin and support items 'are visited occasionally' with no in-sentence hedge; I passed it as a category description because it gives no figure and the document says repeatedly that no usage data exists. A stricter reading would fail it, and the verdict currently rests on grader judgment."
+      },
+      {
+        "assertion": "nav-proposal.md includes tree-test tasks written as user goals, with success targets",
+        "reason": "Nothing checks that tree-test tasks avoid the answer's own words, which is the main quality gap between the runs. The with-skill tasks avoid them ('give them access', not 'invite'; 'a graph', not 'Charts'). The without-skill tasks reuse them ('Invite a freelance designer' against the '+ Invite people' node, 'budget report' against 'Reports', 'Connect Slack'). Suggested assertion: no task contains the label of its correct node."
+      },
+      {
+        "assertion": "Every tree-test task in nav-proposal.md has a stated correct answer and a numeric success target",
+        "reason": "Say whether an approximate target on a control task ('Close to 100%') counts as numeric. I counted it, but a hard threshold (for example 95% or more) would remove the judgment call."
+      },
+      {
+        "reason": "No assertion checks that the proposal gives the full text tree a tree test would run on. The with-skill run supplies it (lines 208-247); the without-skill run gives only the top level and prose descriptions of tabs, so its tasks have no tree to be scored against. Internal consistency is also unchecked: the with-skill run claims every task's shortest path is one or two clicks, yet tasks 7 and 8 sit three levels deep."
+      }
+    ],
+    "overall": "Assertions 1 to 4 are structural and both runs pass them easily. Assertions 8 to 10 carry the discrimination. Assertions 5 and 6 are redundant with assertion 9, and assertions 8 and 10 each leave one judgment call that the wording should settle."
+  }
+}

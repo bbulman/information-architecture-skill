@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: site-migration-redirects
+expected_outcome: |
+  migration-plan.md proposes a sitemap with template types and URL rules (lowercase, hyphens, no file extensions, one trailing-slash form), maps every URL in current-urls.txt to a 301 destination or a 410 with a reason, handles the ?p= and ?page_id= URLs and the PDF, avoids redirect chains and blanket redirects to the homepage, and says how to check the redirects before launch.
+context:
+  scaffold_script: place-files.sh

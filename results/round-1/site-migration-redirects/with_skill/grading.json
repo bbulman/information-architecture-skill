@@ -1,0 +1,107 @@
+{
+  "expectations": [
+    {
+      "text": "Every one of the 34 URLs in current-urls.txt appears in the redirect list with a destination or a 410",
+      "passed": true,
+      "evidence": "Mechanical check (scratch script check.py): parsed every '| N | `old` |' row of the Section 5.1 mapping table (lines 330-365) and looked up each of the 34 input paths (path plus query string). Result: 34/34 found, none missing. Status column counts: 15 x 200 (kept unchanged, e.g. row 8 '`/services/` | 200 | `/services/` | Kept'), 18 x 301, 1 x 410 (row 28 '`/author/admin/` | 410 | none'). Caveat: rows 2 and 3 have placeholder destinations ('`/insights/<slug of post 112>/`', 'the new URL of page 7') pending a stated lookup; they are still listed with a destination class."
+    },
+    {
+      "text": "Moved pages get 301 redirects, and the plan uses no 302 for a permanent move",
+      "passed": true,
+      "evidence": "All 18 moved rows in 5.1 carry status 301, and every rule in the 5.3 `_redirects` file ends in 301. grep for '302' and '308' in the plan returns no matches. Line 18: 'Every other old URL reaches its true equivalent in one 301 hop.'"
+    },
+    {
+      "text": "Old URLs with an obvious new equivalent are redirected to that equivalent, not to the homepage",
+      "passed": true,
+      "evidence": "Row 4 '/about-us.html' -> '/about-us/', row 5 '/About_Us/Our-Team' -> '/about-us/team/', row 13 '/services/change-management.php' -> '/services/change-management/', rows 22-24 posts -> '/insights/<same slug>/', row 29 '/resources/whitepapers/' -> '/insights/reports/', row 30 PDF -> PDF. No redirect target in the table or the rule file is '/'. Line 367: 'nothing is sent to the homepage.'"
+    },
+    {
+      "text": "The plan states URL rules covering lowercase, hyphens, no .html or .php extensions, and one trailing-slash form",
+      "passed": true,
+      "evidence": "Section 4.4 URL rules (lines 215-246): 'Case  Lowercase kebab-case only.' (kebab-case = lowercase, hyphen-separated); 'Trailing slash  Yes, as WordPress used ... the host 301s /services to /services/'; 'Extensions  None for pages. Files keep theirs (.pdf, .xml).' The extension rule does not name .html/.php literally, but 'None for pages' covers both and rows 4 and 13 redirect the .html and .php URLs citing 'file extension'."
+    },
+    {
+      "text": "The proposed sitemap labels each page or URL pattern with a template type, or the plan includes a content model",
+      "passed": true,
+      "evidence": "Both halves are met. Sitemap 4.1 (lines 86-117) labels every node with a template type, e.g. '/services/  section-hub', '/services/strategy-consulting/  service', '/case-studies/  listing', '/insights/<slug>/  article', '/about-us/team/<person>/  person', '/thank-you/  confirmation'. Section 4.5 'Content model' (lines 248-270) gives a table of 15 templates with URL pattern, fields and relations, plus shared fields (slug, legacy_urls, wp_id)."
+    },
+    {
+      "text": "The plan handles the ?p=112 and ?page_id=7 URLs explicitly, with a stated way to resolve them",
+      "passed": true,
+      "evidence": "Rows 2 and 3 of 5.1 map them to '/insights/<slug of post 112>/' and 'the new URL of page 7', noting they need query-string matching. Section 5.4 step 7 (line 493): 'Open `/?p=112` and `/?page_id=7` on the live site; WordPress redirects each to its item's permalink. Record the destination and put the new equivalent in rows 2 and 3.' 5.2 adds a generated rule for every '?p=<id>' and '?page_id=<id>' from the wp_id field. Weakness: in the 5.3 file the two rules are left commented out ('# /?p=112  301 ...') rather than written in host syntax."
+    },
+    {
+      "text": "The plan handles the PDF under wp-content/uploads explicitly",
+      "passed": true,
+      "evidence": "Row 30: '`/wp-content/uploads/2022/03/Operations-Benchmark-Report.pdf` | 301 | `/downloads/operations-benchmark-2022.pdf` | File to file, because links to a PDF expect the PDF. The report also gets a landing page at `/insights/reports/operations-benchmark-2022/`'. The 5.3 file has the explicit rule (line 454) above the '/wp-content/uploads/*  /media/:splat' catch-all."
+    },
+    {
+      "text": "No redirect target in the list is itself the source of another redirect",
+      "passed": true,
+      "evidence": "Mechanical check (check.py): extracted 55 rules from the 5.3 `_redirects` block plus the 18 301 rows of the 5.1 table, 74 source/target pairs in all. Each target was tested against every source as an exact path, with trailing slash added and removed, and against wildcard sources (* and :placeholder converted to regex); the detector was self-tested and does flag real chains. Result: 0 targets match any source. The 17 distinct targets ('/insights/', '/insights/reports/', '/about-us/team/', '/downloads/operations-benchmark-2022.pdf', '/media/:splat', '/sitemap.xml', etc.) are all pages or files in sitemap 4.1. Line 367 says the same: 'there are no chains and no loops'."
+    },
+    {
+      "text": "The plan says how to test the redirects before launch, such as crawling the old URLs and checking status codes",
+      "passed": true,
+      "evidence": "Section 7.1 'Redirect check (run on staging, then on production)' gives a check-redirects.sh curl script that prints first status, Location, hop count and final status for every old URL, with pass criteria: 'Moved URLs: first status 301, the Location is exactly the mapped URL (trailing slash included), one hop, final status 200.' Section 5.5 step 1: 'Deploy to a staging address with the redirect file, run the check in Section 7.1 against staging, and fix every failure before going further.'"
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 0,
+    "total": 9,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "executor_duration_seconds": 759.0,
+    "total_duration_seconds": 759.0
+  },
+  "claims": [
+    {
+      "claim": "Totals: 15 kept, 18 redirected with a 301, 1 gone with a 410",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The status column of the 5.1 table counts exactly 15 x 200, 18 x 301, 1 x 410."
+    },
+    {
+      "claim": "Every target is a page that answers 200 on the new site, so there are no chains and no loops",
+      "type": "quality",
+      "verified": true,
+      "evidence": "No target is a redirect source (mechanical check), and every concrete target appears in sitemap 4.1. The exceptions are the unresolved placeholders in rows 2 and 3."
+    },
+    {
+      "claim": "Roughly 18 to 27 posts are missing from the list",
+      "type": "factual",
+      "verified": true,
+      "evidence": "If page 3 of the blog exists at 10 posts per page, there are 21 to 30 posts; minus the 3 listed that leaves 18 to 27. The plan states the 10-per-page assumption (assumption 3)."
+    },
+    {
+      "claim": "Option B needs four more redirects than option A (14 vs 18 301s)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "B adds /blog/, /blog/page/2/, /blog/page/3/ and /resources/whitepapers/, which A would keep: 18 - 4 = 14."
+    },
+    {
+      "claim": "WordPress shortlinks 'need query-string matching, which path rules cannot do' in the `_redirects` file it says Netlify and Cloudflare Pages read",
+      "type": "factual",
+      "verified": false,
+      "evidence": "Not verified here. Netlify documents query-parameter matching in `_redirects` (the without_skill run uses '/  p=112  ...  301!'), so as a blanket statement this looks overstated for Netlify; it holds for Cloudflare Pages. The plan hedges by telling the reader to confirm query-string support with the host."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "No redirect target in the list is itself the source of another redirect",
+        "reason": "Both runs pass this easily, and it cannot see the most likely hidden chain in a static migration: a target whose trailing slash differs from the declared URL rule, which the host then redirects a second time. A sharper assertion would require every 301 target to match the plan's own trailing-slash form and to be a URL listed in the new sitemap."
+      },
+      {
+        "assertion": "Every one of the 34 URLs in current-urls.txt appears in the redirect list with a destination or a 410",
+        "reason": "This passes on the mapping table alone. In this run the deliverable redirect file leaves rows 2, 3 and 28 as comments, so it implements 31 of the 34 dispositions. An assertion that the shippable rule file implements every non-kept row (placeholders allowed) would tell 'documented' apart from 'deployable'."
+      },
+      {
+        "reason": "This run's main extra work, compared with the baseline, is the taxonomy, navigation spec, options comparison and tree-test plan. No assertion covers any of it, so only assertion 5 measures the skill's information-architecture value. Consider an assertion on navigation or labelling, for example that menu labels match URL segments, or that the plan proposes a way to validate the structure."
+      }
+    ],
+    "overall": "The assertions check the redirect mechanics well. The two mechanical ones are close to non-discriminating for this input, and the IA-specific output is mostly unmeasured."
+  }
+}

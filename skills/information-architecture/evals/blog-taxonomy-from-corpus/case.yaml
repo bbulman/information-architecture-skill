@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: blog-taxonomy-from-corpus
+expected_outcome: |
+  ia-proposal.md surveys all 24 posts, offers more than one way to organize them before recommending one, assigns every post to a category, merges the duplicate tip tags, retires misc, flags posts that fit poorly, does not invent user research results, and says how to validate and maintain the scheme.
+context:
+  scaffold_script: place-files.sh

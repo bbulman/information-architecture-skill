@@ -1,0 +1,98 @@
+{
+  "expectations": [
+    {
+      "text": "Every one of the 34 URLs in current-urls.txt appears in the redirect list with a destination or a 410",
+      "passed": true,
+      "evidence": "Mechanical check (scratch script check.py): parsed every '| N | `old` |' row of the Section 6.1 table (lines 143-178) and looked up each of the 34 input paths (path plus query string). Result: 34/34 found, none missing. Action column counts: 16 'Keep' (explicitly unchanged, e.g. row 8 '`/services/` | `/services/` | Keep') and 18 '301'. No 410s: row 28 '/author/admin/' -> '/insights/' 301. Caveat: rows 2 and 3 have placeholder destinations ('`/insights/<slug of post 112>/`', 'the new URL of page 7') pending a stated lookup."
+    },
+    {
+      "text": "Moved pages get 301 redirects, and the plan uses no 302 for a permanent move",
+      "passed": true,
+      "evidence": "All 18 moved rows in 6.1 are '301', and every rule in the Netlify file ends in 301 (or 301!); Apache rules use [R=301,L]. Line 139: 'Never use a 302: that one is temporary, and it does not pass the old page's ranking to the new one.' The only other status mentioned is 308, for Vercel's permanent redirect (line 356), which is also a permanent code."
+    },
+    {
+      "text": "Old URLs with an obvious new equivalent are redirected to that equivalent, not to the homepage",
+      "passed": true,
+      "evidence": "Row 4 '/about-us.html' -> '/about-us/', row 5 '/About_Us/Our-Team' -> '/about-us/team/', row 13 '.php' -> '/services/change-management/', rows 22-24 posts -> '/insights/<same slug>/', row 30 PDF -> PDF. The only '/' target is '/index.php' -> '/', which is the homepage alias, so it is the true equivalent. Line 202: 'Never send unmatched URLs to the home page.'"
+    },
+    {
+      "text": "The plan states URL rules covering lowercase, hyphens, no .html or .php extensions, and one trailing-slash form",
+      "passed": true,
+      "evidence": "Section 4 'URL rules', rule 1 (line 104): 'Lowercase letters, numbers and hyphens only. No capitals, no underscores and no file extensions such as `.html` or `.php`.' Rule 2 (line 105): 'Every page URL ends in a slash ... (`/services/`, not `/services` or `/services.html`).'"
+    },
+    {
+      "text": "The proposed sitemap labels each page or URL pattern with a template type, or the plan includes a content model",
+      "passed": false,
+      "evidence": "The Section 3 sitemap (lines 47-80) carries change notes such as 'NEW URL (was /blog/)', 'NEW PAGE (overview of both industries)' and 'RSS feed', not template types. Most nodes have no label at all, e.g. '/services/strategy-consulting/', '/case-studies/regional-hospital-network-turnaround/', '/careers/'. There is no content-model section: grep for 'template', 'content model' and 'fields' finds only a WP-CLI '--fields=' flag and 'proposal templates'."
+    },
+    {
+      "text": "The plan handles the ?p=112 and ?page_id=7 URLs explicitly, with a stated way to resolve them",
+      "passed": true,
+      "evidence": "Row 2 (line 146): 'To find it, open `https://www.northgateadvisory.com/?p=112` while WordPress is live: WordPress redirects it to the post's real URL. You can also open post 112 in WP Admin, or run `wp post get 112 --field=post_name`.' Row 3: 'Look it up the same way.' Both are implemented as real query-string rules: Netlify '/  p=112  /insights/SLUG-OF-POST-112/  301!' (line 220) and Apache 'RewriteCond %{QUERY_STRING} (^|&)p=112(&|$)' (line 304), with a note that Cloudflare Pages needs dashboard Redirect Rules instead."
+    },
+    {
+      "text": "The plan handles the PDF under wp-content/uploads explicitly",
+      "passed": true,
+      "evidence": "Row 30 (line 174): '`/wp-content/uploads/2022/03/Operations-Benchmark-Report.pdf` | `/resources/whitepapers/operations-benchmark-report.pdf` | 301 | Redirect the PDF to the PDF, not to the landing page'. Explicit rules sit above the uploads catch-all in both the Netlify file (line 286) and the Apache file (line 338). Open item 5 covers what to do if the report goes behind a form."
+    },
+    {
+      "text": "No redirect target in the list is itself the source of another redirect",
+      "passed": true,
+      "evidence": "Mechanical check (check.py): extracted 50 rules from the Netlify `_redirects` block, 19 RewriteRules from the Apache block (the host-canonicalisation rule was excluded, and the query conditions on the two ID rules were honoured), plus the 18 301 rows of the 6.1 table, 87 source/target pairs in all. Each target was tested against every Netlify-style source (exact path, trailing slash added and removed, wildcards converted to regex) and every Apache pattern (case-insensitive); the detector was self-tested and does flag real chains. Result: 0 targets match any source. The '/resources/' -> '/resources/whitepapers/' rule uses an exact source, so it does not catch its own target. The Apache rules send full https://www URLs, so the host-canonicalisation block adds no hop."
+    },
+    {
+      "text": "The plan says how to test the redirects before launch, such as crawling the old URLs and checking status codes",
+      "passed": true,
+      "evidence": "Section 8 'Testing the redirects' (line 364): 'Run the test against your staging or preview site before launch, then against the live domain straight after the switch. A line passes only if the old URL sends a single 301 to the expected address and that address loads with a 200.' It provides redirect-tests.txt with all 34 old paths plus edge cases, and a check-redirects.sh that checks code, Location, final status and hop count, plus a 404 check. The Section 9 checklist adds a Screaming Frog crawl and 'Run the redirect test against staging until every line passes.'"
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 1,
+    "total": 9,
+    "pass_rate": 0.89
+  },
+  "timing": {
+    "executor_duration_seconds": 686.6,
+    "total_duration_seconds": 686.6
+  },
+  "claims": [
+    {
+      "claim": "16 keep, 18 redirect",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The action column of the 6.1 table counts exactly 16 'Keep' and 18 '301'."
+    },
+    {
+      "claim": "Both files implement section 6 in full",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Every 301 row of 6.1 has a matching Netlify line and an Apache rule; rows 2 and 3 are present with placeholder targets that the test list is set up to fail until they are filled."
+    },
+    {
+      "claim": "Three blog index pages mean at least 21 posts at WordPress's default of 10 per page",
+      "type": "factual",
+      "verified": true,
+      "evidence": "If page 3 exists at 10 per page, there are at least 21 posts."
+    },
+    {
+      "claim": "Vercel's permanent redirect sends a 308; Cloudflare Pages `_redirects` does not match query strings; the QSD flag needs Apache 2.4",
+      "type": "factual",
+      "verified": true,
+      "evidence": "These match the vendors' documented behaviour as far as I know. They were not re-checked against live documentation during grading."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "The proposed sitemap labels each page or URL pattern with a template type, or the plan includes a content model",
+        "reason": "This is the only assertion that separates the two runs. That is good, but it means the run's practical strengths are unmeasured: a second full Apache config, query-string rules written in host syntax, and a test list that includes edge cases. An assertion that the shippable redirect file implements every non-kept row would credit them."
+      },
+      {
+        "assertion": "Every one of the 34 URLs in current-urls.txt appears in the redirect list with a destination or a 410",
+        "reason": "The assertion accepts a 301 or a 410 for '/author/admin/'. That is fine, but no assertion asks the plan to justify the choice, and the two runs chose differently (this run 301 to /insights/, the with_skill run 410)."
+      }
+    ],
+    "overall": "The assertions are solid for redirect mechanics. The two mechanical checks pass for both runs, so on this input they are weakly discriminating."
+  }
+}
