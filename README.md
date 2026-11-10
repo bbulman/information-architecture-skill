@@ -97,6 +97,39 @@ The requests are in [`results/trigger-eval.json`](results/trigger-eval.json). I 
 
 For the split I ran one typical request per skill with about 500 others installed. Ten of the twelve got the right skill. `sitemaps` lost to another skill I had installed called site-architecture, and `findability` lost to a debugging skill on a request that read like a bug report. Typing the name always works.
 
+### If you have hundreds of skills
+
+Those two losses were mostly my install. Claude Code always lists every skill's name, but the descriptions have to fit a budget of 1% of the context window. For me that was 30,000 characters against the 162,721 that my 556 skills needed, so most of them showed as a bare name. The skills you use most keep their descriptions, and a new one is last in line. Rewriting a description can't help if Claude never sees it.
+
+I made two changes and ran six requests twice each, before and after.
+
+| Request | Should reach | As installed | With both changes |
+| --- | --- | --- | --- |
+| What pages do we need for a small accounting firm website, and how should they be organised? | `sitemaps` | `site-architecture`, both times | `sitemaps`, both times |
+| Create a sitemap for a small accounting firm website. | `sitemaps` | `sitemaps`, by way of another sitemap skill | `sitemaps`, both times |
+| Customers keep saying they can't find anything with our site search. Can you work out why? | `findability` | A debugging skill, both times | `findability`, both times |
+| People can't find the pricing page on our site. What's going wrong? | `findability` | `findability`, both times | `findability`, both times |
+| Our app's search endpoint returns a 500 error. Can you fix it? | Not `findability` | A debugging skill, both times | A debugging skill, both times |
+| Generate a sitemap.xml for my Next.js site. | Not `sitemaps` | A Next.js skill, both times | No skill, both times |
+
+That's 8 of 12 before and 12 of 12 after. If one of these isn't firing for you, here are the two changes.
+
+1. Hide any skill that does the same job. Add `"skillOverrides": { "site-architecture": "user-invocable-only" }` to `~/.claude/settings.json`, with your rival's name. You can still type it. This doesn't work on skills that come from a plugin.
+2. Put a routing note in `~/.claude/rules/`. It loads in every session for about 150 tokens. Mine is below, and you'd swap in whichever skills are losing.
+
+   ```markdown
+   # Information architecture requests
+
+   Too many skills are installed for these two to show a description in the skill list, so match the request here and invoke the skill.
+
+   - `findability`: people can't find something on a site or in an app, site search returns nothing or the wrong thing, a search log to analyse, findability to measure. This holds when the request reads like a bug ("what's going wrong?", "work out why"). A real error, failing request or stack trace is still a debugging job.
+   - `sitemaps`: deciding the pages or sections of a site, app or docs set, such as "what pages do we need", "how should we organise it" or "create a sitemap". Generating a sitemap.xml file is not this.
+   ```
+
+Discount this the same way as the rest. It's two runs per request, in headless sessions. My test runs also used these two skills enough to earn them descriptions, which flatters the last column, so I forced both back to name only and reran the two requests that had failed, inside a real project. That was 4 of 4.
+
+With every description forced to show, `findability` won 2 of 2, so its description is fine. `sitemaps` lost to `site-architecture` 2 of 2, which is why the rival has to go. Showing everything would also add about 33,000 tokens to every session, so I didn't keep that.
+
 ## Check my work
 
 - [`skills/information-architecture/evals/`](skills/information-architecture/evals/) has the three cases: the prompt, any input files and one grader file per check.
